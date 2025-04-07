@@ -1,18 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
-
+import apis from './Mulesoft.postman_collection.json';
 import ApiDetails from "./pages/ApiDetails";
+import ApiListDetails from "./pages/ApiListDetails";
 
 function App() {
-  const [showPopup, setShowPopup] = useState(false);
-
+  useEffect(() => {
+    let data = apis.item.map((item) => {
+      item.id = crypto.randomUUID();
+      return item;
+    });
+    localStorage.setItem("apiData", JSON.stringify(data));
+  }, []);
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LandingPage setShowPopup={setShowPopup} showPopup={showPopup} />} />
-        <Route path="/api-details" element={<ApiDetails setShowPopup={setShowPopup} />} />
-        
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/api-details" element={<ApiDetails />} />
+        <Route path="/api-list/:id" element={<ApiListDetails />} />
+
       </Routes>
     </Router>
   );

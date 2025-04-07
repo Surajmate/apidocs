@@ -3,15 +3,18 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "./LandingPage.css";
 
 const LandingPage = () => {
+  const apiData = JSON.parse(localStorage.getItem("apiData")) || [];
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
 
   useEffect(() => {
     if (location.state?.openPopup) {
       setShowPopup(true);
     }
   }, [location.state]);
+
 
   const apiCards = [
     { name: "Access Token API", id: "accessToken" },
@@ -22,7 +25,8 @@ const LandingPage = () => {
   ];
 
   const handleApiClick = (apiId) => {
-    navigate(`/api-details?api=${apiId}`);
+    // navigate(`/api-details?api=${apiId}`);
+    navigate(`/api-list/${apiId}`);
   };
 
   return (
@@ -48,10 +52,10 @@ const LandingPage = () => {
           <div className="popup-container" onClick={(e) => e.stopPropagation()}>
             <h2>API Catalogue</h2>
             <div className="popup-cards">
-              {apiCards.map((api) => (
-                <div key={api.id} className="popup-card" onClick={() => handleApiClick(api.id)}>
+              {apiData.map((api) => (
+                <button key={api.id} className="popup-card" onClick={() => handleApiClick(api.id)}>
                   {api.name}
-                </div>
+                </button>
               ))}
             </div>
           </div>
