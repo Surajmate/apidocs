@@ -1481,6 +1481,54 @@
 						}
 					],
 					"description": "**The Booking API's provides endpoints for managing reservations, ensuring seamless booking operations. It allows users to create, retrieve, update, and cancel bookings efficiently. This API is designed to handle various booking-related functionalities, including availability checks, customer details, and payment integration.**"
+				},
+				{
+					"name": "Otp Login Verification Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{access_token}}"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "{{client_id}}",
+								"description": "Unique identifier for API authentication."
+							},
+							{
+								"key": "client_secret",
+								"value": "{{client_secret}}",
+								"description": "Confidential key for API authentication."
+							},
+							{
+								"key": "enc_key",
+								"value": "{{enc_key}}",
+								"description": "A key used to encrypt data.",
+								"type": "text"
+							},
+							{
+								"key": "x-auth-token",
+								"value": "{{x-auth_token}}",
+								"description": "It is a token that must be copied from the WhoAmI/UserToken API response body and included in the request to verify the identity of the user or client making the API call",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"encData\":\"kqOHUs5/4OtsxasE08/cdO4COF71EB06aNXETU2AGpddyAyRet6qyQw572NfUSnz5y/cfH45WDoTMhidUD7FnHtpbFhFM5Mnvzrt1RoLxmmwq4XsoYHzhfVPAW8YMg9m5Cb5L1UTmTTbSY/6aA5pzUWb2b7qwwF+xQbBL38dcr9emfjjQOMu9DbKeEWyW+aE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{service_base_url}}/oauth-app-qa/api/v1/generate-otp/mobile",
+						"description": "**This API use to generate a login verification request by sending an OTP to the provided mobile number for verification.**\n\n**Request Body:**\n\n- **mobileNo** (String, Required) – The mobile number of the user, used for identification and communication.\n    \n- **masterSchemaId** (String, Required) – A unique identifier for the master schema, ensuring the request is mapped to the correct data structure.\n    \n\n**Example:**\n\n``` json\n{\n  \"mobileNo\": \"9405517558\",\n  \"masterSchemaId\": \"267bc9ca-9213-465f-a7f2-a928626a8b77\"\n}\n\n ```\n\n**Response Body:**\n\n- **success** (Boolean) – Indicates whether the request was successful (`true`) or failed (`false`).\n    \n- **statusCode** (Integer) – Represents the HTTP status code of the response, such as `200` for success or `400` for a bad request.\n    \n- **code** (String) – Contains an error code that helps identify specific issues in case of a failure.\n    \n- **trace** (String) – A unique identifier or trace ID used for debugging and tracking the request.\n    \n\n**Example:**\n\n``` json\n{\n  \"success\": true,\n  \"statusCode\": 201,\n  \"code\": \"\",\n  \"trace\": \"00-2f2aa5658664ccb93ee0972f93ab1e56-3ecb38bddda8ab06-01\"\n}\n\n\n ```"
+					},
+					"response": []
 				}
 			],
 			"description": "**It includes an API for dealers, designed to manage various dealer-related activities and sales data, ensuring efficient operations.**"

@@ -32,7 +32,20 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.descMarkdown {
+  overflow-wrap: break-word;
+}
+
+.list-group-div {
+  box-shadow: #282c34 0px 0px 10px 0px;
+  border-radius: 10px;
+  border-left: 1px solid black;
+  height: 95vh;
+  overflow-x: auto;
 }

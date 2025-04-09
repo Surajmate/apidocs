@@ -25,7 +25,6 @@ const LandingPage = () => {
   ];
 
   const handleApiClick = (apiId) => {
-    // navigate(`/api-details?api=${apiId}`);
     navigate(`/api-list/${apiId}`);
   };
 
