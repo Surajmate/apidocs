@@ -118,10 +118,16 @@
 }
 
 .main-container .property-type {
-  vertical-align: middle;
-  font-style: italic;
-  opacity: .5;
-  padding-left: 1.5rem;
+  vertical-align: middle !important;
+  font-style: italic !important;
+  opacity: .5 !important;
+  padding-left: 1.5rem !important;
+}
+
+.header-parameter .property-type {
+  vertical-align: middle !important;
+  font-style: italic !important;
+  opacity: .5 !important;
 }
 
 .main-container .required {
@@ -259,4 +265,8 @@
 .sandbox-div {
   max-height: 95vh;
   overflow-y: auto;
+}
+
+.markdown {
+  word-break: break-word;
 }

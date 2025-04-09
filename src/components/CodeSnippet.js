@@ -19,7 +19,7 @@ const languageMap = {
 
 const CodeSnippet = ({ code = '', language = 'javascript' }) => {
   const mappedLang = languageMap[language] || 'javascript';
-
+  console.log(code)
   return (
     <SyntaxHighlighter language={mappedLang} style={coy} showLineNumbers>
       {code}

@@ -114,7 +114,7 @@ const ApiListDetails = () => {
                         !apiDetails && isApi && <Markdown>{collectionDetails.desc}</Markdown>
                     }
                     {
-                        !isApi && <div className="w-100">
+                        !isApi && <div className="w-100 markdown">
                             <Markdown>{collectionDetails?.desc}</Markdown>
                         </div>
                     }
