@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import ApiDescription from './ApiDescription';
 import Markdown from 'react-markdown';
+import SandboxPage from './SandboxPage';
 
 const ApiListDetails = () => {
     const { id } = useParams();
@@ -106,8 +107,9 @@ const ApiListDetails = () => {
                         }
                     </div>}
                 </div>
-                <div className='col-9'>
-                    {apiDetails && isApi && <ApiDescription api={apiDetails} />}
+                <div className='col-9 sandbox-div'>
+                    {/* {apiDetails && <ApiDescription api={apiDetails} />} */}
+                    {apiDetails && <SandboxPage api={apiDetails} />}
                     {
                         !apiDetails && isApi && <Markdown>{collectionDetails.desc}</Markdown>
                     }

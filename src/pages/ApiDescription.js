@@ -10,11 +10,7 @@ const languages = [
 ];
 
 const standardExamples = (method, endpoint, body = '{}') => {
-    // const bodyObject = body
-    //     ? body.reduce((acc, curr) => ({ ...acc, [curr.name]: curr.required ? `your_${curr.name}` : '' }), {})
-    //     : null;
     const bodyString = body
-
     return {
         "cURL": `curl -X ${method} "${endpoint}" -H "Authorization: Bearer {token}"${body ? ' -H "Content-Type: application/json" -d \'' + bodyString + '\'' : ''}`,
         "Python": `import requests\nrequests.${method.toLowerCase()}("${endpoint}", headers={"Authorization": "Bearer {token}"${body ? ', "Content-Type": "application/json"' : ''}}${body ? `, json=${bodyString}` : ''})`,
