@@ -1,118 +1,151 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import CodeSnippet from "../components/CodeSnippet";
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+ import { parsePostmanCollection } from '../parsePostman';
 
-import "./ApiDetails.css";
+ import CodeSnippet from '../components/CodeSnippet';
+ import ExpandComponent from '../components/ExpandComponent';
 
-const languages = [
-    "cURL", "Python", "JavaScript (jQuery)", "Java", "Kotlin", "Node.js",
-    "C#", "Ruby", "PHP", "HTTP", "PowerShell"
-];
+ import './ApiDescription.css';
 
-const standardExamples = (method, endpoint, body = '{}') => {
-    const bodyString = body
-    return {
-        "cURL": `curl -X ${method} "${endpoint}" -H "Authorization: Bearer {token}"${body ? ' -H "Content-Type: application/json" -d \'' + bodyString + '\'' : ''}`,
-        "Python": `import requests\nrequests.${method.toLowerCase()}("${endpoint}", headers={"Authorization": "Bearer {token}"${body ? ', "Content-Type": "application/json"' : ''}}${body ? `, json=${bodyString}` : ''})`,
-        "JavaScript (jQuery)": `$.ajax({url: "${endpoint}", type: "${method}", headers: {"Authorization": "Bearer {token}"${body ? ', "Content-Type": "application/json"' : ''}}${body ? `, data: '${bodyString}'` : ''}});`,
-        "Node.js": `const axios = require('axios');\naxios.${method.toLowerCase()}("${endpoint}", {\n  headers: { "Authorization": "Bearer {token}"${body ? ', "Content-Type": "application/json"' : ''} },\n  ${body ? `data: ${bodyString},` : ''}\n}).then(response => console.log(response.data));`,
-        "PHP": `$ch = curl_init("${endpoint}"); curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "${method}"); curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer {token}"${body ? ', "Content-Type: application/json"' : ''}));${body ? ` curl_setopt($ch, CURLOPT_POSTFIELDS, '${bodyString}');` : ''} curl_exec($ch);`,
-        "Java": `import java.net.HttpURLConnection;\nimport java.net.URL;\nimport java.io.OutputStream;\nimport java.util.Scanner;\n\npublic class ApiExample {\n    public static void main(String[] args) throws Exception {\n        URL url = new URL("${endpoint}");\n        HttpURLConnection conn = (HttpURLConnection) url.openConnection();\n        conn.setRequestMethod("${method}");\n        conn.setRequestProperty("Authorization", "Bearer {token}");\n        ${body ? 'conn.setRequestProperty("Content-Type", "application/json");' : ''}\n        conn.setDoOutput(true);\n\n        ${body ? `\n        String jsonInputString = "${bodyString.replace(/"/g, '\\"')}";\n        try(OutputStream os = conn.getOutputStream()) {\n            byte[] input = jsonInputString.getBytes("utf-8");\n            os.write(input, 0, input.length);\n        }` : ''}\n\n        Scanner scanner = new Scanner(conn.getInputStream());\n        while (scanner.hasNext()) {\n            System.out.println(scanner.nextLine());\n        }\n        scanner.close();\n    }\n}`,
-        "Kotlin": `import khttp\n\nkhttp.request(\n  method = "${method}",\n  url = "${endpoint}",\n  headers = mapOf("Authorization" to "Bearer {token}"${body ? ', "Content-Type" to "application/json"' : ''})${body ? `, json = ${bodyString}` : ''}\n)`,
-        "C#": `using System;\nusing System.Net.Http;\nusing System.Text;\nusing System.Threading.Tasks;\n\nclass Program {\n    static async Task Main() {\n        var client = new HttpClient();\n        var request = new HttpRequestMessage(HttpMethod.${method}, "${endpoint}");\n        request.Headers.Add("Authorization", "Bearer {token}");\n        ${body ? `request.Content = new StringContent("${bodyString.replace(/"/g, '\\"')}", Encoding.UTF8, "application/json");` : ''}\n        var response = await client.SendAsync(request);\n        Console.WriteLine(await response.Content.ReadAsStringAsync());\n    }\n}`,
-        "PowerShell": `Invoke-RestMethod -Uri "${endpoint}" -Method ${method} -Headers @{"Authorization"="Bearer {token}"${body ? '; "Content-Type"="application/json"' : ''}}${body ? ` -Body '${bodyString}'` : ''}`,
-        "HTTP": `${method} /${endpoint} HTTP/1.1\nHost: api.example.com\nAuthorization: Bearer {token}${body ? '\nContent-Type: application/json\n\n' + bodyString : ''}`,
-        "Ruby": `require 'net/http'\nrequire 'json'\n\nuri = URI("${endpoint}")\nrequest = Net::HTTP::${method}.new(uri)\nrequest["Authorization"] = "Bearer {token}"\n${body ? 'request["Content-Type"] = "application/json"\nrequest.body = ' + bodyString : ''}\nresponse = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) { |http| http.request(request) }\nputs response.body`,
-    };
+ const languageMap = {
+   "cURL": "bash",
+   "Python": "python",
+   "JavaScript (jQuery)": "javascript",
+   "Java": "java",
+   "Kotlin": "kotlin",
+   "Node.js": "javascript",
+   "C#": "csharp",
+   "Ruby": "ruby",
+   "PHP": "php",
+   "HTTP": "http",
+   "PowerShell": "powershell"
+ };
 
-};
-const ApiDescription = ({ api }) => {
-    const navigate = useNavigate();
-    const [selectedLanguage, setSelectedLanguage] = useState("cURL");
+const ApiDescription = () => {
+  const navigate = useNavigate();
+  const [groupedByCategory, setGroupedByCategory] = useState({});
+  const [expandedCategory, setExpandedCategory] = useState(null);
+  const [apiList, setApiList] = useState({});
+  const [viewAll, setViewAll] = useState(false);
+ 
+  const { apiId } = useParams();
 
-    const [sampleresponse, setSampleresponse] = useState({ body: null, lang: null });
-    const hnadleSampleresponse = (code) => {
-        let found = false;
-        for (let item of api.response) {
-            if (item.code == code) {
-                found = true;
-                setSampleresponse({ body: item.body, lang: item._postman_previewlanguage });
-            }
-        }
-        if (!found) {
-            setSampleresponse({ body: null, lang: null });
-        }
-    }
+  const toggleCategory = (category) => {
+    setExpandedCategory((prev) => (prev === category ? null : category));
+  };
 
-    const codeExamples = standardExamples(api.request.method, api.request.url, api?.request?.body?.row);
+  const handleApiClick = (id) => {
+    navigate(`/api/${id}`);
+  };
+  //  const navigate = useNavigate();
+   const [apiDetails, setApiDetails] = useState(null);
+   const [selectedLanguage, setSelectedLanguage] = useState("cURL");
+  useEffect(() => {
+    const response = JSON.parse(localStorage.getItem('postman_collection'));
+    setApiList(response);
+  }, []);
 
-    return (
-        <div className="api-details-container">
-            <button className="sandbox-button">Test in Sandbox</button>
-            <h1>{api.name}</h1>
-            <p><strong>Method:</strong> <span className={`method-badge ${api.request.method.toLowerCase()}`}>{api.request.method}</span></p>
-            <p><strong>Endpoint:</strong> {api.request.url}</p>
-            <h3>Headers</h3>
-            {
-                api?.request?.header.map((header, index) => (
-                    <p key={index}>{header.key} <span className="text-muted ms-2">{header.type}</span></p>
-                ))
-            }
-            <div className="http-response-box">
-                <h3>HTTP Response Code</h3>
-                <pre>200 OK</pre>
-            </div>
+  //  if (!apiDetails) return <div>Loading...</div>;
 
+  //  const codeSnippet = apiDetails.code?.[selectedLanguage] || ' Code sample not available';
 
-            {api?.request && (
-                <div className="sample-box">
-                    <h3>Request Sample:</h3>
-                    <CodeSnippet
-                        code={api?.request?.body?.row || '{}'}
-                        language={api?.request?.body?.options?.language || "json"}
-                    />
-                </div>
+  return (
+    <>
+    <div class="row">
+      <div class="col-3">
+      <div className="available-apis-section text-white">
+        {/* <h2 className="section-title">Available APIs</h2> */}
+        <div className="accordion-container">
+          {Array.isArray(apiList.item) ? (
+            <ul>
+                {apiList.item.map((entry, index) => (
+                  <li key={index}>
+                    <strong>{entry.name}</strong>
+                      <div className="accordion-body">
+                        {entry.item.map((api) => (
+                          <div
+                          key={api}
+                          className="accordion-api-item"
+                          >
+                            {api.name}
+                          </div>
+                        ))}
+                      </div>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>No items found in the collection.</p>
             )}
-
-            <div className="my-2">
-                <label >Select code status</label>
-                <select name="" id="" onChange={(e) => hnadleSampleresponse(e.target.value)}>
-                    <option value="">Select code status</option>
-                    {api.response.map((code, index) => (<option key={index} value={code.code}>{code.code}</option>))}
-                </select>
-            </div>
-            {api.response && (
-                <div className="sample-box">
-                    <h3>Response Sample:</h3>
-                    <CodeSnippet
-                        code={sampleresponse.body || '{}'}
-                        language={sampleresponse.lang || "json"}
-                    />
-                </div>
-            )}
-
-            <div className="language-select my-2">
-                <h3>Select Language:</h3>
-                <select onChange={(e) => setSelectedLanguage(e.target.value)} value={selectedLanguage}>
-                    {languages.map((lang) => (
-                        <option key={lang} value={lang}>{lang}</option>
-                    ))}
-                </select>
-            </div>
-
-            <div className="sample-box" >
-                <h3>{selectedLanguage} Example:</h3>
-                <CodeSnippet
-                    code={codeExamples[selectedLanguage] || `// ${selectedLanguage} example not available`}
-                    language={selectedLanguage?.toLowerCase().includes("javascript") ? "javascript" : selectedLanguage?.toLowerCase()}
-                />
-            </div>
-
-            <button className="catalogue-button" onClick={() => navigate("/", { state: { openPopup: true } })}>
-                Back to API Catalogue
-            </button>
+        <div>
         </div>
-    );
-}
+      </div>
+    </div>
+      </div>
+      <div class="col-9">
+     {/* <div className="api-details-container"> */}
+       {/* Header */}
+       <div className="api-header">
+        Hi
+         {/* <div>
+           <h1>{apiDetails.name}</h1>
+           <p>{apiDetails.description || 'No description available.'}</p>
+         </div>
+         <button className="api-description-back-btn" onClick={() => navigate('/')}>
+           Back
+         </button> */}
+       </div>
 
-export default ApiDescription
+       {/* Method and Endpoint */}
+       {/* <div className="api-method-url">
+         <span className="method-tag">{apiDetails.method}</span>
+         <span className="endpoint-url">{apiDetails.endpoint}</span>
+       </div> */}
+
+       {/* Parameters */}
+       {/* <div className="section-heading">Request</div>
+       <div className="parameter-group">
+         {apiDetails.parameters?.map((param, index) => (
+          <div key={index} className="parameter-row">
+            <span className="parameter-name">{param.name}</span>
+            <span className="parameter-type">{param.type}</span>
+            <span className="parameter-required">
+              {param.required ? 'Required' : 'Optional'}
+            </span>
+          </div>
+        ))}
+      </div> */}
+
+      {/* Response */}
+      {/* <div className="section-heading">Response</div>
+      {typeof apiDetails.response === 'object' ? (
+        <ExpandComponent obj={apiDetails.response} />
+      ) : (
+        <pre className="code-box">{apiDetails.response}</pre>
+      )} */}
+
+      {/* Language Tabs */}
+      {/* <div className="section-heading">Languages</div>
+      <div className="language-tabs">
+        {Object.keys(languageMap).map((lang, index) => (
+          <img
+            key={index}
+            src={`/assets/${lang.toLowerCase().replace(/[^a-z]/g, '')}.png`}
+            alt={lang}
+            className={`language-tab ${selectedLanguage === lang ? 'active' : ''}`}
+            onClick={() => setSelectedLanguage(lang)}
+          />
+        ))}
+      </div> */}
+
+      {/* Code Sample */}
+      {/* <div className="section-heading">Request Sample</div>
+      <CodeSnippet code={codeSnippet} language={languageMap[selectedLanguage]} /> */}
+    </div>
+      </div>
+    {/* </div> */}
+    </>
+  );
+};
+
+export default ApiDescription;

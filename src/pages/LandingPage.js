@@ -1,65 +1,54 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import "./LandingPage.css";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './LandingPage.css';
 
 const LandingPage = () => {
-  const apiData = JSON.parse(localStorage.getItem("apiData")) || [];
-  const [showPopup, setShowPopup] = useState(false);
+  // const [apiList, setApiList] = useState([]);
+  // const [groupedByCategory, setGroupedByCategory] = useState({});
+  // const [expandedCategory, setExpandedCategory] = useState(null);
+  // const [viewAll, setViewAll] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const navigate = useNavigate();
-  const location = useLocation();
 
-
-  useEffect(() => {
-    if (location.state?.openPopup) {
-      setShowPopup(true);
-    }
-  }, [location.state]);
-
-
-  const apiCards = [
-    { name: "Access Token API", id: "accessToken" },
-    { name: "Sales Data API", id: "salesData" },
-    { name: "Service Info API", id: "serviceInfo" },
-    { name: "Adhoc API", id: "adhocInfo" },
-    { name: "Encryption & Decryption API", id: "security" }
+  const bikeImages = [
+    "/assets/Avenger.webp",
+    "/assets/Pulsar BIke 2.webp",
+    "/assets/Pulsar Bike.webp",
+    "/assets/bikespage-p_n_160.webp"
   ];
 
-  const handleApiClick = (apiId) => {
-    navigate(`/api-list/${apiId}`);
-  };
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % bikeImages.length);
+    }, 2000);
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
-    <div className="landing-container">
-      {/* Navbar */}
-      <div className="navbar">
-        <div className="nav-left">
-          <img src="/assets/Frame.jpg" alt="Company Logo" className="logo" />
+    <div style={{ backgroundColor: "black", height: "100vh" }}>
+      <nav className="navbar">
+        <div className="logo">
+          <img src="/assets/logo.png" alt="BikeAPI Logo" className="logo-img" />
         </div>
-      </div>
-
-      <div className="bike-container">
-        <img src="/assets/Frame1244836564.jpg" alt="Bike" className="bike-image" />
-      </div>
-
-      <div className="cta-section">
-        <button className="catalogue-button" onClick={() => setShowPopup(true)}>VIEW API</button>
-      </div>
-
-      {/* Popup for API Cards */}
-      {showPopup && (
-        <div className="popup-overlay" onClick={() => setShowPopup(false)}>
-          <div className="popup-container" onClick={(e) => e.stopPropagation()}>
-            <h2>API Catalogue</h2>
-            <div className="popup-cards">
-              {apiData.map((api) => (
-                <button key={api.id} className="popup-card" onClick={() => handleApiClick(api.id)}>
-                  {api.name}
-                </button>
-              ))}
-            </div>
-          </div>
+        <div className="nav-links">
+          <span>Home</span>
+          <span onClick={() => navigate("/explore")}>Explore APIs</span>
+          <span>Sandbox</span>
+          <span className="auth-links">
+            <button className="auth-btn">Sign In</button>
+            <button className="auth-btn">Sign Up</button>
+          </span>
         </div>
-      )}
+      </nav>
+
+      <div className="image-slider">
+        <img src={bikeImages[currentImageIndex]} alt="Bike" className="slider-img" />
+      </div>
+
+      <div className="image-slider">
+        <button className="btn btn-outline-light" onClick={() => navigate("/explore")}>View API Catalogue</button>
+      </div>
+
     </div>
   );
 };

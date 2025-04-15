@@ -2,7 +2,6 @@ import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { coy } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-
 const languageMap = {
   "cURL": "bash",
   "Python": "python",
@@ -18,8 +17,7 @@ const languageMap = {
 };
 
 const CodeSnippet = ({ code = '', language = 'javascript' }) => {
-  const mappedLang = languageMap[language] || 'javascript';
-  console.log(code)
+  const mappedLang = languageMap[language] || language;
   return (
     <SyntaxHighlighter language={mappedLang} style={coy} showLineNumbers>
       {code}
