@@ -3,5 +3,13 @@
     "javascript": "html",
     "javascriptreact": "html",
     "typescriptreact": "html"
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    ".mule": true
   }
 }

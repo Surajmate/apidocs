@@ -17,14 +17,6 @@ body {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
   }
   
-  /* Header */
-  .api-header {
-    /* display: flex; */
-    /* justify-content: space-between; */
-    /* align-items: center; */
-    /* margin-bottom: 2rem; */
-  }
-  
   .api-header h1 {
     font-size: 2rem;
     color: #111;
@@ -184,5 +176,42 @@ body {
     .section-heading {
       font-size: 1.3rem;
     }
+  }
+  .accordion-header {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em 0;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .accordion-body {
+    padding-left: 1em;
+    margin-bottom: 1em;
+  }
+  
+  .accordion-api-item ul {
+    padding-left: 1em;
+  }
+  
+  .accordion-subitem {
+    cursor: pointer;
+    padding: 0.3em 0;
+    color: #ddd;
+  }
+  
+  .accordion-subitem:hover {
+    /* color: #fff; */
+    text-decoration: underline;
+  }
+
+  .accordion-item, .accordion-header{
+    background-color: transparent;
+    color: white;
+  }
+
+  .accordion-container{
+    width: 300px !important;
   }
   
