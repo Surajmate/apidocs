@@ -243,9 +243,9 @@ const ApiDescription = () => {
             </div>
           </div>
         </div>
-        <div className="col-9 description-container colStyle">
+        <div className="col-9 description-container colStyle" style={{marginTop: '10px'}}>
           {apiData.name ? (
-            <div className="">
+            <div className="mt-2">
               <h1>{apiData.name}</h1>
               {
                 <div className="markdown-container" style={{ padding: '1rem', background: '#fff', borderRadius: '8px' }}>
@@ -306,8 +306,8 @@ const ApiDescription = () => {
                     <div className="section-heading">Request Body</div>
                     {apiData?.request?.body && <ExpandComponent obj={JSON.parse(apiData?.request?.body?.raw || '{}')} />}
 
-                    <div className="section-heading">Request Response</div>
-                    {/* {sampleresponse.body && <ExpandComponent obj={JSON.parse(sampleresponse.body || '{}')} />} */}
+                    <div className="section-heading">Response Body</div>
+                    {apiData?.request?.body && <ExpandComponent obj={JSON.parse(apiData?.request?.body?.raw || '{}')} />}
 
                   </div>
                   <div className="col-7 p-3">

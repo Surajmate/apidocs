@@ -255,6 +255,8 @@ body {
 .description-container {
   height: 95vh;
   overflow-y: auto;
+  background-color: white;
+  border-radius: 10px;
 }
 
 /* Hide all scrollbars on the entire page */
@@ -341,6 +343,7 @@ body {
 
 .markdown-container{
   background-color: transparent !important;
+  word-wrap: break-word;
 }
 
 .available-apis-section{
