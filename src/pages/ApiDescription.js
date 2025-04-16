@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { coy } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import remarkGfm from 'remark-gfm';
+import ExpandComponent from '../components/ExpandComponent';
 // import CodeSnippet from '../components/CodeSnippet';
 
 const generators = {
@@ -86,29 +87,38 @@ func main() {
 
 
 const languageMap = {
-  "cURL": "cURL",
-  "Bash": "bash",
-  "Python": "python",
-  "JavaScript (jQuery)": "javascript",
-  "Java": "java",
-  "Kotlin": "kotlin",
-  "Node.js": "nodejs",
-  "C#": "csharp",
-  "Ruby": "ruby",
+  "cURL": "curl",
   "PHP": "php",
-  "HTTP": "http",
-  "PowerShell": "powershell"
-};
+  "Python": "python",
+  "Node.js": "nodejs",
+  "Go": "go",
 
+  // "Java": "java",
+  // "Bash": "bash",
+  // "JavaScript (jQuery)": "javascript",
+  // "Kotlin": "kotlin",
+  // "C#": "csharp",
+  // "Ruby": "ruby",
+  // "HTTP": "http",
+  // "PowerShell": "powershell"
+};
 const ApiDescription = () => {
   const [apiList, setApiList] = useState({});
   const [apiData, setApiData] = useState({});
-  const [selectedLanguage, setSelectedLanguage] = useState("cURL");
+  const [selectedLanguage, setSelectedLanguage] = useState("curl");
+  const [showLang, setShowLang] = useState("cURL");
   const [expandedCategoryIndex, setExpandedCategoryIndex] = useState(null);
 
   useEffect(() => {
     const response = JSON.parse(localStorage.getItem('postman_collection') || '{}');
     setApiList(response);
+    if (response.item && response.item.length > 0) {
+      let obj = {
+        name: response.item[0].name || '',
+        request: { description: response.item[0].description || '' },
+      }
+      setApiData(obj);
+    }
   }, []);
 
   const handleApiClick = (data) => {
@@ -122,10 +132,28 @@ const ApiDescription = () => {
   const handleBack = () => {
     setApiData({});
   };
+  const [sampleresponse, setSampleresponse] = useState({ body: null, lang: null, code: '' });
+  const hnadleSampleresponse = (code) => {
+    let found = false;
+    for (let item of apiData.response) {
+      if (item.code == code) {
+        found = true;
+        setSampleresponse({ body: item.body, lang: item._postman_previewlanguage, code: code });
+      }
+    }
+    if (!found) {
+      setSampleresponse({ body: null, lang: null });
+    }
+  }
+  // useEffect(() => {
+  //     if (apiData.response.length > 0) {
+  //         setSampleresponse({ body: api.response[0].body, lang: api.response[0]._postman_previewlanguage, code: api.response[0].code });
+  //     }
+  // }, [])
 
   return (
-    <>
-      <div className="row">
+    <div>
+      <div className="row g-0">
         <div className="col-3">
           <div className="available-apis-section text-white">
             <div className="accordion-container">
@@ -143,7 +171,7 @@ const ApiDescription = () => {
 
                       {expandedCategoryIndex === index && (
                         <div className="accordion-body">
-                          {entry.item.map((api, index1) => (
+                          {entry?.item?.length > 0 ? entry.item.map((api, index1) => (
                             <div key={index1} className="accordion-api-item">
                               <h6>{api.name}</h6>
                               {Array.isArray(api.item) ? (
@@ -160,10 +188,19 @@ const ApiDescription = () => {
                                   ))}
                                 </ul>
                               ) : (
-                                <p>No items found in the collection.</p>
+                                <ul>
+                                  <li key={index1}>
+                                    <div
+                                      className="accordion-subitem"
+                                      onClick={() => handleApiClick(api)}
+                                    >
+                                      <strong>{api.name}</strong>
+                                    </div>
+                                  </li>
+                                </ul>
                               )}
                             </div>
-                          ))}
+                          )) : <p>No items found in the collection.</p>}
                         </div>
                       )}
                     </li>
@@ -175,104 +212,106 @@ const ApiDescription = () => {
             </div>
           </div>
         </div>
-
-        <div className="col-9">
+        <div className="col-9 description-container">
           {apiData.name ? (
-            <>
+            <div className="">
+              <h1>{apiData.name}</h1>
               <div className="api-header">
                 <div>
-                  <h1>{apiData.name}</h1>
-                  <p>{
-                   <div className="markdown-container" style={{ padding: '1rem', background: '#fff', borderRadius: '8px' }}>
-                   <ReactMarkdown
-                     children={apiData.request.description}
-                     remarkPlugins={[remarkGfm]}
-                     components={{
-                       code({ node, inline, className, children, ...props }) {
-                         const match = /language-(\w+)/.exec(className || '');
-                         return !inline && match ? (
-                           <SyntaxHighlighter style={coy} language={match[1]} PreTag="div" {...props}>
-                             {String(children).replace(/\n$/, '')}
-                           </SyntaxHighlighter>
-                         ) : (
-                           <code className={className} {...props}>
-                             {children}
-                           </code>
-                         );
-                       },
-                     }}
-                   />
-                 </div> || 'No description available.'}</p>
+                  {
+                    <div className="markdown-container" style={{ padding: '1rem', background: '#fff', borderRadius: '8px' }}>
+                      <ReactMarkdown
+                        children={apiData.request.description}
+                        remarkPlugins={[remarkGfm]}
+                        components={{
+                          code({ node, inline, className, children, ...props }) {
+                            const match = /language-(\w+)/.exec(className || '');
+                            return !inline && match ? (
+                              <SyntaxHighlighter style={coy} language={match[1]} PreTag="div" {...props}>
+                                {String(children).replace(/\n$/, '')}
+                              </SyntaxHighlighter>
+                            ) : (
+                              <code className={className} {...props}>
+                                {children}
+                              </code>
+                            );
+                          },
+                        }}
+                      />
+                    </div> || 'No description available.'}
                 </div>
-                {/* <button className="api-description-back-btn" onClick={handleBack}>
-                  Back
-                </button> */}
               </div>
-
-              <div className="api-method-url">
-                <span className="method-tag">{apiData?.request?.method}</span>
-                <span className="endpoint-url">{apiData?.request?.url}</span>
-              </div>
-
-              <div className="section-heading">Request Headers</div>
-              <div className="parameter-group">
-                {apiData.request.header?.map((param, index) => (
-                  <div key={index} className="parameter-row">
-                    <span className="parameter-name">{param.key}</span>
-                    <span className="parameter-type">{param.value}</span>
-                    <span className="parameter-required">
-                      {param.required ? 'Required' : 'Optional'}
-                    </span>
+              {apiData?.request?.url && <div className="row g-0">
+                <div className="api-method-url">
+                  <span className="method-tag">{apiData?.request?.method}</span>
+                  <span className="endpoint-url">{apiData?.request?.url}</span>
+                </div>
+                <div className="col-5 p-3">
+                  <div className="section-heading">Request Headers</div>
+                  <div className="parameter-group">
+                    {apiData.request.header?.map((param, index) => (
+                      <div key={index} className="parameter-row">
+                        <span className="parameter-name">{param.key}</span>
+                        <span className="parameter-type">{param.value}</span>
+                        <span className="parameter-required">
+                          {param.required ? 'Required' : 'Optional'}
+                        </span>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                  <div className="section-heading">Request Body</div>
+                  {apiData?.request?.body && <ExpandComponent obj={JSON.parse(apiData?.request?.body?.raw || '{}')} />}
 
-              <div className="section-heading">Response</div>
-              {typeof apiData.response === 'object' ? (
-                <pre className="code-box">{apiData.response}</pre>
-              ) : (
-                <pre className="code-box">{apiData.response}</pre>
-              )}
+                  <div className="section-heading">Request Response</div>
+                  {/* {sampleresponse.body && <ExpandComponent obj={JSON.parse(sampleresponse.body || '{}')} />} */}
 
-              <div className="section-heading">Languages</div>
-              <div className="language-tabs">
-                {Object.keys(languageMap).map((lang, index) => (
-                  <img
-                    key={index}
-                    src={`/assets/${lang.toLowerCase().replace(/[^a-z]/g, '')}.png`}
-                    alt={lang}
-                    className={`language-tab ${selectedLanguage === lang ? 'active' : ''}`}
-                    onClick={() => setSelectedLanguage(lang)}
-                    onError={(e) => { e.target.style.display = 'none'; }}
-                  />
-                ))}
-              </div>
+                </div>
+                <div className="col-7 p-3">
+                  <div className="section-heading">Languages</div>
+                  <div className="language-tabs">
+                    {Object.keys(languageMap).map((lang, index) => (
+                      <img
+                        key={index}
+                        src={`/assets/${lang.toLowerCase().replace(/[^a-z]/g, '')}.png`}
+                        alt={lang}
+                        className={`language-tab ${showLang === lang ? 'active' : ''}`}
+                        onClick={() => { setSelectedLanguage(languageMap[lang]); setShowLang(lang); }}
+                      />
+                    ))}
+                  </div>
 
-              <div className="section-heading">Request Sample</div>
-              
-              {/* <CodeSnippet code={{
-                name: apiData.name,
-                request: {
-                  method: apiData.request.method,
-                  header: apiData.request.header,
-                  description: apiData.request.description,
-                  url: apiData.request.url,
-                  body: apiData.request.body ? JSON.stringify(apiData.request.body, null, 2) : null
-                }
-              }} lang={selectedLanguage} /> */}
-              <SyntaxHighlighter
-                language={languageMap[selectedLanguage]}
-                style={coy}
-                showLineNumbers>
-                {/* {generators[selectedLanguage](apiData, apiData.request.body ? JSON.stringify(apiData.request.body, null, 2) : null)} */}
-                </SyntaxHighlighter>
-            </>
+                  <div className="section-heading">Request Sample</div>
+                  <SyntaxHighlighter
+                    language={'javascript'}
+                    style={coy}
+                    showLineNumbers>
+                    {generators[selectedLanguage](apiData, JSON.stringify(apiData?.request?.body?.raw || {}, null, 2))}
+                  </SyntaxHighlighter>
+                  <select className="form-select mt-2 select-border" value={sampleresponse.code} name="" id="" onChange={(e) => hnadleSampleresponse(e.target.value)}>
+                    <option value="">Select code status</option>
+                    {apiData?.response?.map((code, index) => (<option key={index} value={code.code}>{code.code}</option>))}
+                  </select>
+                  <div className="section-heading">Response</div>
+                  {/* {typeof apiData?.response === 'object' ? (
+                    <pre className="code-box">{apiData?.response || {}}</pre>
+                  ) : (
+                    <pre className="code-box">{apiData?.response || {}}</pre>
+                  )} */}
+                  <SyntaxHighlighter
+                    language={'javascript'}
+                    style={coy}
+                    showLineNumbers>
+                    {sampleresponse.body || '{}'}
+                  </SyntaxHighlighter>
+                </div>
+              </div>}
+            </div>
           ) : (
             <p>No Data Available</p>
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
