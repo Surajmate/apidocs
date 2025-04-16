@@ -2,21 +2,97 @@ import React, { useEffect, useState } from 'react';
 import './LandingPage.css';
 import './ApiDescription.css';
 
-import CodeSnippet from '../components/CodeSnippet';
-// import ExpandComponent from '../components/ExpandComponent';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { coy } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import remarkGfm from 'remark-gfm';
+// import CodeSnippet from '../components/CodeSnippet';
+
+const generators = {
+  curl: (json, body) => {
+    const headers = json.request.header.map(h => `--header '${h.key}: ${h.value}'`).join(' \\\n');
+    return `curl --location --request ${json.request.method} '${json.request.url}' \\\n${headers} \\\n--header 'Content-Type: application/json' \\\n--data-raw '${body}'`;
+  },
+
+  php: (json, body) => {
+    const headers = json.request.header.map(h => `"${h.key}: ${h.value}"`).concat(`"Content-Type: application/json"`).join(",\n    ");
+    return `<?php
+$curl = curl_init();
+$data = ${body};
+curl_setopt_array($curl, [
+  CURLOPT_URL => "${json.request.url}",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_CUSTOMREQUEST => "${json.request.method}",
+  CURLOPT_POSTFIELDS => json_encode($data),
+  CURLOPT_HTTPHEADER => [
+    ${headers}
+  ],
+]);
+$response = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+echo $err ? "cURL Error: $err" : $response;
+?>`;
+  },
+
+  python: (json, body) => {
+    const headers = json.request.header.reduce((acc, h) => ({ ...acc, [h.key]: h.value }), { 'Content-Type': 'application/json' });
+    return `import requests
+url = "${json.request.url}"
+headers = ${JSON.stringify(headers, null, 2)}
+payload = ${body}
+response = requests.post(url, headers=headers, json=payload)
+print(response.text)`;
+  },
+
+  nodejs: (json, body) => {
+    const headers = json.request.header.reduce((acc, h) => ({ ...acc, [h.key]: h.value }), { 'Content-Type': 'application/json' });
+    return `const axios = require('axios');
+const options = {
+  method: '${json.request.method}',
+  url: '${json.request.url}',
+  headers: ${JSON.stringify(headers, null, 2)},
+  data: ${body}
+};
+axios.request(options).then(res => {
+  console.log(res.data);
+}).catch(err => {
+  console.error(err);
+});`;
+  },
+
+  go: (json, body) => {
+    return `package main
+import (
+  "bytes"
+  "fmt"
+  "net/http"
+  "io/ioutil"
+)
+func main() {
+  url := "${json.request.url}"
+  payload := []byte(${JSON.stringify(body)})
+  req, _ := http.NewRequest("${json.request.method}", url, bytes.NewBuffer(payload))
+  ${json.request.header.map(h => `req.Header.Set("${h.key}", "${h.value}")`).join('\n  ')}
+  req.Header.Set("Content-Type", "application/json")
+  client := &http.Client{}
+  res, _ := client.Do(req)
+  defer res.Body.Close()
+  body, _ := ioutil.ReadAll(res.Body)
+  fmt.Println(string(body))
+}`;
+  }
+};
 
 
 const languageMap = {
-  "cURL": "bash",
+  "cURL": "cURL",
+  "Bash": "bash",
   "Python": "python",
   "JavaScript (jQuery)": "javascript",
   "Java": "java",
   "Kotlin": "kotlin",
-  "Node.js": "javascript",
+  "Node.js": "nodejs",
   "C#": "csharp",
   "Ruby": "ruby",
   "PHP": "php",
@@ -173,10 +249,23 @@ const ApiDescription = () => {
               </div>
 
               <div className="section-heading">Request Sample</div>
-              {/* <CodeSnippet
-                code={apiData || 'Code sample not available'}
+              
+              {/* <CodeSnippet code={{
+                name: apiData.name,
+                request: {
+                  method: apiData.request.method,
+                  header: apiData.request.header,
+                  description: apiData.request.description,
+                  url: apiData.request.url,
+                  body: apiData.request.body ? JSON.stringify(apiData.request.body, null, 2) : null
+                }
+              }} lang={selectedLanguage} /> */}
+              <SyntaxHighlighter
                 language={languageMap[selectedLanguage]}
-              /> */}
+                style={coy}
+                showLineNumbers>
+                {/* {generators[selectedLanguage](apiData, apiData.request.body ? JSON.stringify(apiData.request.body, null, 2) : null)} */}
+                </SyntaxHighlighter>
             </>
           ) : (
             <p>No Data Available</p>
