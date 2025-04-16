@@ -52,11 +52,39 @@ body {
   margin-bottom: 2rem;
 }
 
+.a_url_header_inner, .request-header-inner {
+  padding: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.a_full_url_inner {
+  max-width: 100%;
+}
+
+.l_method {
+  padding: 5px 10px 5px 10px;
+  font-weight: 700;
+  display: inline;
+  font-size: 11px;
+  background: #F9FBFF;
+  color: #007bff;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
 .method-tag {
   background-color: #00a5ff;
   padding: 0.3rem 0.8rem;
   border-radius: 4px;
   margin-right: 1rem;
+  /* background: #F9FBFF;
+  color: #007bff;
+  padding: 5px 10px 5px 15px;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  margin-right: 20px; */
 }
 
 .endpoint-url {
@@ -183,22 +211,28 @@ body {
   justify-content: space-between;
   padding: 0.5em 0;
   font-weight: bold;
-  border-bottom: 1px solid #ccc;
+  /* border-bottom: 1px solid #ccc; */
 }
 
 .accordion-body {
-  padding-left: 1em;
+  padding: 5px;
   margin-bottom: 1em;
 }
 
 .accordion-api-item ul {
-  padding-left: 1em;
+  margin: 0 !important;
+  padding-left: 0em;
+}
+
+.accordion-api-item {
+  /* margin: 0 !important; */
 }
 
 .accordion-subitem {
   cursor: pointer;
   padding: 0.3em 0;
   color: #ddd;
+  margin: 5px 0px;
 }
 
 .accordion-subitem:hover {
@@ -244,4 +278,75 @@ body {
 .colStyle::-webkit-scrollbar {
   display: none;
   /* Chrome, Safari, Opera */
+}
+
+* Padding */
+.px-2 {
+  padding-left: 0.5rem;   /* 8px */
+  padding-right: 0.5rem;
+}
+ 
+.py-1 {
+  padding-top: 0.25rem;   /* 4px */
+  padding-bottom: 0.25rem;
+}
+ 
+/* Border radius */
+.rounded-full {
+  border-radius: 9999px;
+}
+ 
+/* Font size */
+.text-sm {
+  font-size: 0.875rem;
+}
+ 
+/* Font weight */
+.font-medium {
+  font-weight: 500;
+}
+ 
+/* Background and text colors */
+
+.get {
+  color: #6BDD9A;
+}
+
+.post {
+  color: #FFE47E;
+}
+
+.del{
+  color: #F79A8E
+}
+
+.put {
+  color: #74AEF6;
+}
+
+.text-red-800 {
+  color: #991b1b;
+}
+ 
+.bg-gray-100 {
+  background-color: #f3f4f6;
+}
+.text-gray-800 {
+  color: #1f2937;
+}
+
+.space-x-2{
+  font-size: 8px !important;
+}
+
+.markdown-container{
+  background-color: transparent !important;
+}
+
+.available-apis-section{
+  margin: 10px 10px !important;
+}
+
+.accordion-api-item>ul, .accordion-item{
+  list-style: none;
 }
