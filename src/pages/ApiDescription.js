@@ -126,7 +126,7 @@ const ApiDescription = () => {
   return (
     <>
       <div className="row">
-        <div className="col-3">
+        <div className="col-3 colStyle">
           <div className="available-apis-section text-white">
             <div className="accordion-container">
               {Array.isArray(apiList.item) ? (
@@ -176,7 +176,7 @@ const ApiDescription = () => {
           </div>
         </div>
 
-        <div className="col-9">
+        <div className="col-9 colStyle">
           {apiData.name ? (
             <>
               <div className="api-header">
@@ -268,7 +268,28 @@ const ApiDescription = () => {
                 </SyntaxHighlighter>
             </>
           ) : (
-            <p>No Data Available</p>
+            <>
+            <div className="markdown-container" style={{ padding: '1rem', background: '#fff', borderRadius: '8px' }}>
+                   <ReactMarkdown
+                     children={(apiList?.info?.description) ? apiList?.info?.description : ''}
+                     remarkPlugins={[remarkGfm]}
+                     components={{
+                       code({ node, inline, className, children, ...props }) {
+                         const match = /language-(\w+)/.exec(className || '');
+                         return !inline && match ? (
+                           <SyntaxHighlighter style={coy} language={match[1]} PreTag="div" {...props}>
+                             {String(children).replace(/\n$/, '')}
+                           </SyntaxHighlighter>
+                         ) : (
+                           <code className={className} {...props}>
+                             {children}
+                           </code>
+                         );
+                       },
+                     }}
+                   />
+                 </div>
+            </>
           )}
         </div>
       </div>

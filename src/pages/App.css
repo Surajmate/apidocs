@@ -270,3 +270,22 @@
   .markdown {
     word-break: break-word;
   }
+
+  /* Hide all scrollbars on the entire page */
+* {
+  scrollbar-width: none;           /* Firefox */
+  -ms-overflow-style: none;        /* IE and Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none;                   /* Chrome, Safari, Opera */
+}
+
+.colStyle{
+  overflow-y: auto !important;
+  height: 735px !important;
+}
+
+.colStyle::-webkit-scrollbar {
+  display: none;                   /* Chrome, Safari, Opera */
+}
