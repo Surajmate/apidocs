@@ -254,6 +254,93 @@
   color: #0056b3;
   transform: scale(1.2);
 }
+/* ---------------------- */
+/* Modal Overlay */
+/* ---------------------- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Modal Container */
+.modal {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 350px;
+  max-width: 90%;
+  position: relative;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #444;
+  cursor: pointer;
+}
+
+/* Modal Heading */
+.modal h2 {
+  text-align: center;
+  color: #151c50;
+  margin-bottom: 20px;
+}
+
+/* Modal Form Inputs */
+.modal-form input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Submit Button */
+.submit-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #151c50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: #1a2584;
+}
+
+/* Toggle Login/Signup Link */
+.toggle-text {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.toggle-text span {
+  color: #007bff;
+  cursor: pointer;
+  margin-left: 5px;
+  font-weight: bold;
+}
+
+.toggle-text span:hover {
+  text-decoration: underline;
+}
+
 
 ----------------------
 /* Feedback Section */

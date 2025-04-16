@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import './LandingPage.css';
 
 const LandingPage = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+  const [isSignup, setIsSignup] = useState(false);
+
   const navigate = useNavigate();
+  const location = useLocation();
 
   const bikeImages = [
     "/assets/Avenger.webp",
@@ -23,12 +27,7 @@ const LandingPage = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  const scrollToContact = () => {
-    const section = document.getElementById("contact");
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const isHomePage = location.pathname === "/";
 
   return (
     <div style={{ backgroundColor: "white", minHeight: "100vh" }}>
@@ -38,14 +37,10 @@ const LandingPage = () => {
           <img src="/assets/logo.png" alt="BikeAPI Logo" className="logo-img" />
         </div>
         <div className="nav-links">
-          <span>Home</span>
+          {!isHomePage && <span onClick={() => navigate("/")}>Home</span>}
           <span onClick={() => navigate("/explore")}>Explore APIs</span>
-          <span>Sandbox</span>
-          <span onClick={scrollToContact}>Contact Us</span>
-          <span className="auth-links">
-            <button className="auth-btn">Sign In</button>
-            <button className="auth-btn">Sign Up</button>
-          </span>
+          <span onClick={() => navigate("/contact")}>Contact Us</span>
+          <span className="nav-login" onClick={() => setShowModal(true)}>Login</span>
         </div>
       </nav>
 
@@ -61,42 +56,28 @@ const LandingPage = () => {
         </button>
       </div>
 
-      {/* Contact Us Section */}
-      <div id="contact" className="contact-section">
-        <h2>Contact Us</h2>
-
-        <div className="contact-container">
-          {/* Reach Us */}
-          <div className="contact-box">
-            <h3>📞 Reach Us</h3>
-            <p>
-              📱 <a href="tel:+917219821111" className="contact-link">+91 7219821111</a>
-              <span className="small-text"> (9 AM to 8 PM)</span>
+      {/* Login/Signup Modal */}
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <span className="close-btn" onClick={() => setShowModal(false)}>&times;</span>
+            <h2>{isSignup ? "Create Account" : "Login"}</h2>
+            <form className="modal-form">
+              {isSignup && <input type="text" placeholder="Name" required />}
+              <input type="email" placeholder="Email" required />
+              <input type="password" placeholder="Password" required />
+              {isSignup && <input type="password" placeholder="Confirm Password" required />}
+              <button type="submit" className="submit-btn">{isSignup ? "Sign Up" : "Login"}</button>
+            </form>
+            <p className="toggle-text">
+              {isSignup ? "Already have an account?" : "Don't have an account?"}
+              <span onClick={() => setIsSignup(!isSignup)}>
+                {isSignup ? " Login" : " Sign Up"}
+              </span>
             </p>
-            <p>
-              ✉️ <a href="mailto:customerservice@bajajauto.co.in" className="contact-link">
-                customerservice@bajajauto.co.in
-              </a>
-            </p>
-          </div>
-
-          {/* Follow Us */}
-          <div className="contact-box">
-            <h3>🔗 Follow Us</h3>
-            <div className="social-icons">
-              <a href="https://www.facebook.com/BajajAutoLtdWFI/" target="_blank" rel="noopener noreferrer" className="social-link">
-                <FaFacebook />
-              </a>
-              <a href="https://www.instagram.com/bajaj_auto_ltd/?igshid=9mdtd6dprx16" target="_blank" rel="noopener noreferrer" className="social-link">
-                <FaInstagram />
-              </a>
-              <a href="https://www.linkedin.com/company/bajaj-auto-ltd/?originalSubdomain=in" target="_blank" rel="noopener noreferrer" className="social-link">
-                <FaLinkedin />
-              </a>
-            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
