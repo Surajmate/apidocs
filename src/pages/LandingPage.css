@@ -34,6 +34,13 @@
 .nav-links span {
   margin-left: 20px;
   cursor: pointer;
+  color: #6fb5ff;
+}
+
+
+.nav-links span:hover {
+  color: #dedede; 
+  text-decoration: underline; 
 }
 
 .auth-btn {
@@ -44,9 +51,12 @@
   padding: 10px;
   cursor: pointer;
   border-radius: 15%;
-  
   font-size: small;
   
+}
+
+.auth-btn:hover{
+  color: #2564a6;
 }
 
 /* ---------------------- */
