@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './LandingPage.css';
 import './ApiDescription.css';
+import { useNavigate } from 'react-router-dom';
 
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -8,6 +9,23 @@ import { coy } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import remarkGfm from 'remark-gfm';
 import ExpandComponent from '../components/ExpandComponent';
 // import CodeSnippet from '../components/CodeSnippet';
+
+const methodColors = {
+  GET: "get",
+  POST: "post",
+  PUT: "put",
+  DELETE: "del"
+};
+ 
+const ApiMethodChip = ({ method }) => {
+  const colorClasses = methodColors[method.toUpperCase()] || "bg-gray-100 text-gray-800";
+ 
+  return (
+<span className={`px-2 py-1 rounded-full text-sm font-medium ${colorClasses}`}>
+      {method}
+</span>
+  );
+};
 
 const generators = {
   curl: (json, body) => {
@@ -103,6 +121,7 @@ const languageMap = {
   // "PowerShell": "powershell"
 };
 const ApiDescription = () => {
+  const navigate = useNavigate();
   const [apiList, setApiList] = useState({});
   const [apiData, setApiData] = useState({});
   const [selectedLanguage, setSelectedLanguage] = useState("curl");
@@ -153,6 +172,17 @@ const ApiDescription = () => {
 
   return (
     <div>
+      <nav className="navbar">
+        <div className="logo">
+          <img src="/assets/logo.png" alt="BikeAPI Logo" className="logo-img" />
+        </div>
+        <div className="nav-links">
+          <span onClick={() => navigate("/")}>Home</span>
+          <span onClick={() => navigate("/explore")}>Explore APIs</span>
+          <span onClick={() => navigate("/contact")}>Contact Us</span>
+          <span onClick={() => navigate("/login")}>Login</span>
+        </div>
+      </nav>
       <div className="row g-0">
         <div className="col-3 colStyle">
           <div className="available-apis-section text-white">
@@ -182,7 +212,8 @@ const ApiDescription = () => {
                                         className="accordion-subitem"
                                         onClick={() => handleApiClick(entry1)}
                                       >
-                                        <strong>{entry1.name}</strong>
+                                         <ApiMethodChip className="space-x-2" method={entry1.request.method} />
+                                        <strong> {entry1.name}</strong>
                                       </div>
                                     </li>
                                   ))}
@@ -216,35 +247,47 @@ const ApiDescription = () => {
           {apiData.name ? (
             <div className="">
               <h1>{apiData.name}</h1>
-              <div className="api-header">
-                <div>
-                  {
-                    <div className="markdown-container" style={{ padding: '1rem', background: '#fff', borderRadius: '8px' }}>
-                      <ReactMarkdown
-                        children={apiData.request.description}
-                        remarkPlugins={[remarkGfm]}
-                        components={{
-                          code({ node, inline, className, children, ...props }) {
-                            const match = /language-(\w+)/.exec(className || '');
-                            return !inline && match ? (
-                              <SyntaxHighlighter style={coy} language={match[1]} PreTag="div" {...props}>
-                                {String(children).replace(/\n$/, '')}
-                              </SyntaxHighlighter>
-                            ) : (
-                              <code className={className} {...props}>
-                                {children}
-                              </code>
-                            );
-                          },
-                        }}
-                      />
-                    </div> || 'No description available.'}
-                </div>
-              </div>
+              {
+                <div className="markdown-container" style={{ padding: '1rem', background: '#fff', borderRadius: '8px' }}>
+                  <ReactMarkdown
+                    children={apiData.request.description}
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      code({ node, inline, className, children, ...props }) {
+                        const match = /language-(\w+)/.exec(className || '');
+                        return !inline && match ? (
+                          <SyntaxHighlighter style={coy} language={match[1]} PreTag="div" {...props}>
+                            {String(children).replace(/\n$/, '')}
+                          </SyntaxHighlighter>
+                        ) : (
+                          <code className={className} {...props}>
+                            {children}
+                          </code>
+                        );
+                      },
+                    }}
+                  />
+                </div> || 'No description available.'
+              }
               {apiData?.request?.url && <div className="">
                 <div className="api-method-url mx-3">
+                {/* <div class="a_url row">
+                  <div class="a_url_header">
+                    <div class="a_url_header_inner">
+                    <div class="a_url_txt">URL</div>
+                    <div class="a_url_copy_url copyclip" id="copyurlData" data-clipboard-target="#apiurl"><img src="https://icongr.am/clarity/copy.svg?color=0000FF" alt="Icon"/></div>
+                    </div>
+                  </div>
+                  <div class="a_full_url">
+                    <div class="a_full_url_inner">
+                    <span class="l_method ">
+                    {apiData?.request?.method}	</span>
+                  <span id="apiurl" class="apiurl_s copyurl">{apiData?.request?.url}</span>
+                      </div>
+                  </div>
+                </div> */}
                   <span className="method-tag">{apiData?.request?.method}</span>
-                  <span className="endpoint-url">{apiData?.request?.url}</span>
+                  <span className="endpoint-url pt-1">{apiData?.request?.url}</span>
                 </div>
                 <div className="row g-0">
                   <div className="col-5 p-3">
@@ -283,6 +326,7 @@ const ApiDescription = () => {
 
                     <div className="section-heading">Request Sample</div>
                     <SyntaxHighlighter
+                      className="code-box"
                       language={'javascript'}
                       style={coy}
                       showLineNumbers>

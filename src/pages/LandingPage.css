@@ -19,10 +19,6 @@
   color: white;
 }
 
-.logo-img {
-  margin: 5px 10px !important;
-}
-
 .nav-links span {
   margin-left: 20px;
   cursor: pointer;
@@ -44,7 +40,7 @@
 .logo-img {
   width: 50px;
   height: 50px;
-  margin-right: 10px;
+  margin: 5px 10px !important;
   filter: brightness(3); 
 }
 
@@ -81,20 +77,13 @@
 /* ---------------------- */
 .image-slider {
   width: 1500px;
-  /* height: 100%;
-  overflow: hidden; */
   display: flex;
   justify-content: center;
-  /* margin-left: 22%; */
-  /* margin-right: 0%; */
-  /* align-items: center; */
-  }
-  
-  .btn.btn-outline-light{
-    background-color:rgb(43, 102, 169)
-  
+}
 
-  }
+.btn.btn-outline-light{
+  background-color:rgb(43, 102, 169)
+}
 
 .slider-img {
   width: 49%;
