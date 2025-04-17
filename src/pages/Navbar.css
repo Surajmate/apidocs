@@ -1,0 +1,61 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    background-color: #151c50;
+    color: white;
+  }
+  
+  .nav-links span {
+    margin-left: 20px;
+    cursor: pointer;
+    color: #6fb5ff;
+    transition: color 0.3s;
+  }
+  
+  .nav-links span:hover {
+    color: #ffffff;
+  }
+  
+  
+  .logo {
+    display: flex;
+    align-items: center;
+  
+  }
+  
+  .logo-img {
+    width: 50px;
+    height: 50px;
+    margin: 5px 10px !important;
+    filter: brightness(3); 
+  }
+  
+  .nav-links span {
+    margin-left: 20px;
+    cursor: pointer;
+    color: #9acbff;
+  }
+  
+  
+  .nav-links span:hover {
+    color: #dedede; 
+    text-decoration: underline; 
+  }
+  
+  .auth-btn {
+    margin-left: 10px;
+    background-color: #c3c1bc;
+    color: black;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 15%;
+    font-size: small;
+    
+  }
+  
+  .auth-btn:hover{
+    background-color: #d8da65;
+  }
