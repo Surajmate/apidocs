@@ -44,10 +44,10 @@
 
 /* API Accordion Container */
 .accordion-container {
-  background-color: #2a2a2a;
-  border-radius: 10px;
-  padding: 10px;
-  width: 280px;
+  /* background-color: #2a2a2a; */
+  /* border-radius: 10px; */
+  /* padding: 10px; */
+  /* width: 280px; */
 }
 
 /* Each Category */
@@ -70,17 +70,17 @@
 /* API Item */
 .accordion-api-item {
   padding: 6px 10px;
-  background-color: #3a3a3a;
+  /* background-color: #3a3a3a; */
   margin: 4px 0;
   font-size: 13px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.2s;
 }
-
+/* 
 .accordion-api-item:hover {
   background-color: #4c4c4c;
-}
+} */
 
 /* View All Button */
 .view-all-toggle {

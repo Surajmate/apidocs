@@ -215,17 +215,12 @@ body {
 }
 
 .accordion-body {
-  padding: 5px;
-  margin-bottom: 1em;
+  padding: 1px;
 }
 
 .accordion-api-item ul {
   margin: 0 !important;
   padding-left: 0em;
-}
-
-.accordion-api-item {
-  /* margin: 0 !important; */
 }
 
 .accordion-subitem {
@@ -352,4 +347,5 @@ body {
 
 .accordion-api-item>ul, .accordion-item{
   list-style: none;
+  border: none !important;
 }

@@ -7,6 +7,9 @@ import ExpandComponent from "../components/ExpandComponent";
 import Navbar from "./Navbar";
 import "./LandingPage.css";
 import "./ApiDescription.css";
+import "./Sidebar.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faTimes, faFolder } from "@fortawesome/free-solid-svg-icons";
 
 const methodColors = {
   GET: "get",
@@ -17,7 +20,7 @@ const methodColors = {
 
 const ApiMethodChip = ({ method }) => {
   const colorClasses =
-    methodColors[method.toUpperCase()] || "bg-gray-100 text-gray-800";
+    methodColors[method.toUpperCase()] || "post";
 
   return (
     <span
@@ -133,6 +136,8 @@ const ApiDescription = () => {
   const [selectedLanguage, setSelectedLanguage] = useState("curl");
   const [showLang, setShowLang] = useState("cURL");
   const [expandedCategoryIndex, setExpandedCategoryIndex] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const handleTrigger = () => setIsOpen(!isOpen);
 
   useEffect(() => {
     const response = JSON.parse(
@@ -181,84 +186,182 @@ const ApiDescription = () => {
 
   return (
     <div className="special-gothic-regular container-fluid p-0 m-0">
-      <Navbar />
-      <div className="row g-0">
-        <div className="col-3 colStyle">
-          <div className="available-apis-section text-white">
-            <div className="accordion-container">
-              {Array.isArray(apiList.item) ? (
-                <ul className="accordion-list">
-                  {apiList.item.map((entry, index) => (
-                    <li key={index} className="accordion-item">
-                      <div
-                        className="accordion-header"
-                        onClick={() => toggleAccordion(index)}
-                      >
-                        <strong>{entry.name}</strong>
-                        <span>
-                          {expandedCategoryIndex === index ? "▲" : "▼"}
-                        </span>
-                      </div>
-
-                      {expandedCategoryIndex === index && (
-                        <div className="accordion-body">
-                          {entry?.item?.length > 0 ? (
-                            entry.item.map((api, index1) => (
-                              <div key={index1} className="accordion-api-item">
-                                <h6>{api.name}</h6>
-                                {Array.isArray(api.item) ? (
-                                  <ul>
-                                    {api.item.map((entry1, index2) => (
-                                      <li key={index2}>
-                                        <div
-                                          className="accordion-subitem"
-                                          onClick={() => handleApiClick(entry1)}
-                                        >
-                                          <ApiMethodChip
-                                            className="space-x-2"
-                                            method={entry1.request.method}
-                                          />
-                                          <strong> {entry1.name}</strong>
-                                        </div>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                ) : (
-                                  <ul>
-                                    <li key={index1}>
-                                      <div
-                                        className="accordion-subitem"
-                                        onClick={() => handleApiClick(api)}
-                                      >
-                                        <strong>{api.name}</strong>
-                                      </div>
-                                    </li>
-                                  </ul>
-                                )}
-                              </div>
-                            ))
+      <div className="page">
+        <div className="content p-0">
+          <Navbar />
+          <div
+            className="description-container colStyle"
+            style={{ padding: "10px 200px" }}
+          >
+            {apiData.name ? (
+              <div className="mt-2">
+                <h1>{apiData.name}</h1>
+                {(
+                  <div
+                    className="markdown-container"
+                    style={{
+                      padding: "1rem",
+                      background: "#fff",
+                      borderRadius: "8px",
+                    }}
+                  >
+                    <ReactMarkdown
+                      children={apiData.request.description}
+                      remarkPlugins={[remarkGfm]}
+                      components={{
+                        code({ node, inline, className, children, ...props }) {
+                          const match = /language-(\w+)/.exec(className || "");
+                          return !inline && match ? (
+                            <SyntaxHighlighter
+                              style={coy}
+                              language={match[1]}
+                              PreTag="div"
+                              {...props}
+                            >
+                              {String(children).replace(/\n$/, "")}
+                            </SyntaxHighlighter>
                           ) : (
-                            <p>No items found in the collection.</p>
-                          )}
+                            <code className={className} {...props}>
+                              {children}
+                            </code>
+                          );
+                        },
+                      }}
+                    />
+                  </div>
+                ) || "No description available."}
+                {apiData?.request?.url && (
+                  <div className="">
+                    <div className="api-method-url mx-3">
+                      {/* <div class="a_url row">
+                <div class="a_url_header">
+                  <div class="a_url_header_inner">
+                  <div class="a_url_txt">URL</div>
+                  <div class="a_url_copy_url copyclip" id="copyurlData" data-clipboard-target="#apiurl"><img src="https://icongr.am/clarity/copy.svg?color=0000FF" alt="Icon"/></div>
+                  </div>
+                </div>
+                <div class="a_full_url">
+                  <div class="a_full_url_inner">
+                  <span class="l_method ">
+                  {apiData?.request?.method}	</span>
+                <span id="apiurl" class="apiurl_s copyurl">{apiData?.request?.url}</span>
+                    </div>
+                </div>
+              </div> */}
+                      <span className="method-tag">
+                        {apiData?.request?.method}
+                      </span>
+                      <span className="endpoint-url pt-1">
+                        {apiData?.request?.url}
+                      </span>
+                    </div>
+                    <div className="row g-0">
+                      <div className="col-5 p-3">
+                        <div className="section-heading">Request Headers</div>
+                        <div className="parameter-group">
+                          {apiData.request.header?.map((param, index) => (
+                            <div key={index} className="parameter-row">
+                              <span className="parameter-name">
+                                {param.key}
+                              </span>
+                              <span className="parameter-type">
+                                {param.value}
+                              </span>
+                              <span className="parameter-required">
+                                {param.required ? "Required" : "Optional"}
+                              </span>
+                            </div>
+                          ))}
                         </div>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p>No items found in the collection.</p>
-              )}
-            </div>
-          </div>
-        </div>
-        <div
-          className="col-9 description-container colStyle"
-          style={{ marginTop: "10px" }}
-        >
-          {apiData.name ? (
-            <div className="mt-2">
-              <h1>{apiData.name}</h1>
-              {(
+                        <div className="section-heading">Request Body</div>
+                        {apiData?.request?.body && (
+                          <ExpandComponent
+                            obj={JSON.parse(
+                              apiData?.request?.body?.raw || "{}"
+                            )}
+                          />
+                        )}
+
+                        <div className="section-heading">Response Body</div>
+                        {apiData?.request?.body && (
+                          <ExpandComponent
+                            obj={JSON.parse(
+                              apiData?.request?.body?.raw || "{}"
+                            )}
+                          />
+                        )}
+                      </div>
+                      <div className="col-7 p-3">
+                        <div className="section-heading">Languages</div>
+                        <div className="language-tabs">
+                          {Object.keys(languageMap).map((lang, index) => (
+                            <img
+                              key={index}
+                              src={`/assets/${lang
+                                .toLowerCase()
+                                .replace(/[^a-z]/g, "")}.png`}
+                              alt={lang}
+                              className={`language-tab ${
+                                showLang === lang ? "active" : ""
+                              }`}
+                              onClick={() => {
+                                setSelectedLanguage(languageMap[lang]);
+                                setShowLang(lang);
+                              }}
+                            />
+                          ))}
+                        </div>
+
+                        <div className="section-heading">Request Sample</div>
+                        <SyntaxHighlighter
+                          className="code-box"
+                          language={"javascript"}
+                          style={coy}
+                          showLineNumbers
+                        >
+                          {generators[selectedLanguage](
+                            apiData,
+                            JSON.stringify(
+                              apiData?.request?.body?.raw || {},
+                              null,
+                              2
+                            )
+                          )}
+                        </SyntaxHighlighter>
+                        <select
+                          className="form-select mt-2 select-border"
+                          value={sampleresponse.code}
+                          name=""
+                          id=""
+                          onChange={(e) => hnadleSampleresponse(e.target.value)}
+                        >
+                          <option value="">Select code status</option>
+                          {apiData?.response?.map((code, index) => (
+                            <option key={index} value={code.code}>
+                              {code.code}
+                            </option>
+                          ))}
+                        </select>
+                        <div className="section-heading">Response</div>
+                        {/* {typeof apiData?.response === 'object' ? (
+                  <pre className="code-box">{apiData?.response || {}}</pre>
+                ) : (
+                  <pre className="code-box">{apiData?.response || {}}</pre>
+                )} */}
+                        <SyntaxHighlighter
+                          language={"javascript"}
+                          style={coy}
+                          showLineNumbers
+                        >
+                          {sampleresponse.body || "{}"}
+                        </SyntaxHighlighter>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <>
                 <div
                   className="markdown-container"
                   style={{
@@ -268,7 +371,11 @@ const ApiDescription = () => {
                   }}
                 >
                   <ReactMarkdown
-                    children={apiData.request.description}
+                    children={
+                      apiList?.info?.description
+                        ? apiList?.info?.description
+                        : ""
+                    }
                     remarkPlugins={[remarkGfm]}
                     components={{
                       code({ node, inline, className, children, ...props }) {
@@ -291,169 +398,93 @@ const ApiDescription = () => {
                     }}
                   />
                 </div>
-              ) || "No description available."}
-              {apiData?.request?.url && (
-                <div className="">
-                  <div className="api-method-url mx-3">
-                    {/* <div class="a_url row">
-                  <div class="a_url_header">
-                    <div class="a_url_header_inner">
-                    <div class="a_url_txt">URL</div>
-                    <div class="a_url_copy_url copyclip" id="copyurlData" data-clipboard-target="#apiurl"><img src="https://icongr.am/clarity/copy.svg?color=0000FF" alt="Icon"/></div>
-                    </div>
-                  </div>
-                  <div class="a_full_url">
-                    <div class="a_full_url_inner">
-                    <span class="l_method ">
-                    {apiData?.request?.method}	</span>
-                  <span id="apiurl" class="apiurl_s copyurl">{apiData?.request?.url}</span>
-                      </div>
-                  </div>
-                </div> */}
-                    <span className="method-tag">
-                      {apiData?.request?.method}
-                    </span>
-                    <span className="endpoint-url pt-1">
-                      {apiData?.request?.url}
-                    </span>
-                  </div>
-                  <div className="row g-0">
-                    <div className="col-5 p-3">
-                      <div className="section-heading">Request Headers</div>
-                      <div className="parameter-group">
-                        {apiData.request.header?.map((param, index) => (
-                          <div key={index} className="parameter-row">
-                            <span className="parameter-name">{param.key}</span>
-                            <span className="parameter-type">
-                              {param.value}
-                            </span>
-                            <span className="parameter-required">
-                              {param.required ? "Required" : "Optional"}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="section-heading">Request Body</div>
-                      {apiData?.request?.body && (
-                        <ExpandComponent
-                          obj={JSON.parse(apiData?.request?.body?.raw || "{}")}
-                        />
-                      )}
+              </>
+            )}
+          </div>
+        </div>
 
-                      <div className="section-heading">Response Body</div>
-                      {apiData?.request?.body && (
-                        <ExpandComponent
-                          obj={JSON.parse(apiData?.request?.body?.raw || "{}")}
-                        />
-                      )}
-                    </div>
-                    <div className="col-7 p-3">
-                      <div className="section-heading">Languages</div>
-                      <div className="language-tabs">
-                        {Object.keys(languageMap).map((lang, index) => (
-                          <img
-                            key={index}
-                            src={`/assets/${lang
-                              .toLowerCase()
-                              .replace(/[^a-z]/g, "")}.png`}
-                            alt={lang}
-                            className={`language-tab ${
-                              showLang === lang ? "active" : ""
-                            }`}
-                            onClick={() => {
-                              setSelectedLanguage(languageMap[lang]);
-                              setShowLang(lang);
-                            }}
-                          />
-                        ))}
+        <div className={`sidebar ${isOpen ? "sidebar--open" : ""}`}>
+          <div className="trigger" onClick={handleTrigger}>
+            
+        <div className={`logo ${isOpen ? "" : "d-none"}`}>
+          <img src="/assets/logo.png" alt="BikeAPI Logo" className="logo-img"/>
+        </div>
+          <FontAwesomeIcon className="FontAwesomeIcon" icon={isOpen ? faTimes : faBars} />
+          </div>
+
+          <div className="available-apis-section text-white">
+            <div className="accordion-container">
+              {Array.isArray(apiList.item) ? (
+                <ul className="accordion-list">
+                  {apiList.item.map((entry, index) => (
+                    <li key={index} className="accordion-item">
+                      <div
+                        className="accordion-header"
+                        onClick={() => toggleAccordion(index)}
+                      >
+                        <strong>{entry.name}</strong>
+                        <span>
+                          {expandedCategoryIndex === index ? "▲" : "▼"}
+                        </span>
                       </div>
 
-                      <div className="section-heading">Request Sample</div>
-                      <SyntaxHighlighter
-                        className="code-box"
-                        language={"javascript"}
-                        style={coy}
-                        showLineNumbers
-                      >
-                        {generators[selectedLanguage](
-                          apiData,
-                          JSON.stringify(
-                            apiData?.request?.body?.raw || {},
-                            null,
-                            2
-                          )
-                        )}
-                      </SyntaxHighlighter>
-                      <select
-                        className="form-select mt-2 select-border"
-                        value={sampleresponse.code}
-                        name=""
-                        id=""
-                        onChange={(e) => hnadleSampleresponse(e.target.value)}
-                      >
-                        <option value="">Select code status</option>
-                        {apiData?.response?.map((code, index) => (
-                          <option key={index} value={code.code}>
-                            {code.code}
-                          </option>
-                        ))}
-                      </select>
-                      <div className="section-heading">Response</div>
-                      {/* {typeof apiData?.response === 'object' ? (
-                    <pre className="code-box">{apiData?.response || {}}</pre>
-                  ) : (
-                    <pre className="code-box">{apiData?.response || {}}</pre>
-                  )} */}
-                      <SyntaxHighlighter
-                        language={"javascript"}
-                        style={coy}
-                        showLineNumbers
-                      >
-                        {sampleresponse.body || "{}"}
-                      </SyntaxHighlighter>
-                    </div>
-                  </div>
-                </div>
+                      {expandedCategoryIndex === index && (
+                        <div className="accordion-body">
+                          {entry?.item?.length > 0 ? (
+                            entry.item.map((api, index1) => (
+                              <div key={index1} className="accordion-api-item">
+                                <h6><FontAwesomeIcon className="FontAwesomeIcon" icon={faFolder} /> {api.name}</h6>
+                                {Array.isArray(api.item) ? (
+                                  <ul>
+                                    {api.item.map((entry1, index2) => (
+                                      <li key={index2}>
+                                        <div
+                                          className="accordion-subitem"
+                                          onClick={() => handleApiClick(entry1)}
+                                        >
+                                          <ApiMethodChip
+                                            className="space-x-2"
+                                            method={entry1.request.method}
+                                          />
+                                          <strong onClick={handleTrigger}>
+                                            {" "}
+                                            {entry1.name}
+                                          </strong>
+                                        </div>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                ) : (
+                                  <ul>
+                                    <li key={index1}>
+                                      <div
+                                        className="accordion-subitem"
+                                        onClick={() => handleApiClick(api)}
+                                      >
+                                      <ApiMethodChip
+                                        className="space-x-2"
+                                        method={api.request.method}
+                                      />
+                                        <strong>{api.name}</strong>
+                                      </div>
+                                    </li>
+                                  </ul>
+                                )}
+                              </div>
+                            ))
+                          ) : (
+                            <p>No items found in the collection.</p>
+                          )}
+                        </div>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No items found in the collection.</p>
               )}
             </div>
-          ) : (
-            <>
-              <div
-                className="markdown-container"
-                style={{
-                  padding: "1rem",
-                  background: "#fff",
-                  borderRadius: "8px",
-                }}
-              >
-                <ReactMarkdown
-                  children={
-                    apiList?.info?.description ? apiList?.info?.description : ""
-                  }
-                  remarkPlugins={[remarkGfm]}
-                  components={{
-                    code({ node, inline, className, children, ...props }) {
-                      const match = /language-(\w+)/.exec(className || "");
-                      return !inline && match ? (
-                        <SyntaxHighlighter
-                          style={coy}
-                          language={match[1]}
-                          PreTag="div"
-                          {...props}
-                        >
-                          {String(children).replace(/\n$/, "")}
-                        </SyntaxHighlighter>
-                      ) : (
-                        <code className={className} {...props}>
-                          {children}
-                        </code>
-                      );
-                    },
-                  }}
-                />
-              </div>
-            </>
-          )}
+          </div>
         </div>
       </div>
     </div>
