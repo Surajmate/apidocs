@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/apidocs/static/css/main.42af3a96.css",
-    "main.js": "/apidocs/static/js/main.bd856635.js",
-    "static/js/453.29ce6e02.chunk.js": "/apidocs/static/js/453.29ce6e02.chunk.js",
+    "main.js": "/apidocs/static/js/main.e7a735a4.js",
+    "static/js/453.35b19e08.chunk.js": "/apidocs/static/js/453.35b19e08.chunk.js",
     "index.html": "/apidocs/index.html",
     "main.42af3a96.css.map": "/apidocs/static/css/main.42af3a96.css.map",
-    "main.bd856635.js.map": "/apidocs/static/js/main.bd856635.js.map",
-    "453.29ce6e02.chunk.js.map": "/apidocs/static/js/453.29ce6e02.chunk.js.map"
+    "main.e7a735a4.js.map": "/apidocs/static/js/main.e7a735a4.js.map",
+    "453.35b19e08.chunk.js.map": "/apidocs/static/js/453.35b19e08.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.42af3a96.css",
-    "static/js/main.bd856635.js"
+    "static/js/main.e7a735a4.js"
   ]
 }
