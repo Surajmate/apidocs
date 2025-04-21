@@ -68,12 +68,11 @@ const Navbar = () => {
           <img src="/assets/logo.png" alt="BikeAPI Logo" className="logo-img" onClick={() => handleLogoClick()}/>
         </div>
         <div className="nav-links">
-          {!isHomePage && <span onClick={() => navigate("/")}>Home</span>}
-          <span onClick={() => navigate("/explore")}>Explore APIs</span>
-          <span onClick={() => navigate("/contact")}>Contact Us</span>
+          {!isHomePage && <span onClick={() => navigate("/")}>HOME</span>}
+          <span onClick={() => navigate("/explore")}>EXPLORE APIS</span>
+          {/* <span onClick={() => navigate("/contact")}>CONTACT US</span> */}
           <span onClick={() => navigate("/faq")}>FAQ</span>
-
-          <span className="nav-login" onClick={() => setShowModal(true)}>Login</span>
+          {/* <span className="nav-login" onClick={() => setShowModal(true)}>LOGIN</span> */}
         </div>
       </nav>
 

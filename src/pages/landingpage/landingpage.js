@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import "./landingpage.css"
 import Navbar from "../Navbar/Navbar";
 import Cards from "../card/Cards";
 
 const LandingPage = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const images = [
     {
@@ -64,7 +64,7 @@ const LandingPage = () => {
                 <img
                   key={index}
                   src={hoveredIndex === index ? img.hover : img.initial}
-                  alt={`Image ${index + 1}`}
+                  alt={`dataImg ${index + 1}`}
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}
                 />
@@ -86,17 +86,17 @@ const LandingPage = () => {
           </div>
           <div className="how-it-work-div-two">
             <div>
-              <img src="https://preview.cruip.com/solid/dist/images/feature-icon-01.svg"></img>
+              <img alt="" src="https://preview.cruip.com/solid/dist/images/feature-icon-01.svg"></img>
               <p>
                 1.Sign up for an Bajaj <br></br>Developer Account.
               </p>
             </div>
             <div>
-              <img src="https://preview.cruip.com/solid/dist/images/feature-icon-02.svg"></img>
+              <img alt="" src="https://preview.cruip.com/solid/dist/images/feature-icon-02.svg"></img>
               <p>2.Select API</p>
             </div>
             <div>
-              <img src="https://preview.cruip.com/solid/dist/images/feature-icon-03.svg"></img>
+              <img alt="" src="https://preview.cruip.com/solid/dist/images/feature-icon-03.svg"></img>
               <p>3.Test it Out</p>
             </div>
           </div>
@@ -108,15 +108,15 @@ const LandingPage = () => {
           </div>
           <div className="Journey-to-go-Live-two">
             <div>
-              <img src="https://res.cloudinary.com/dlwpgtmcn/image/upload/v1744959380/tools_wrench_icon-1320087277641665992_bpwhq1.png"></img>
+              <img alt="" src="https://res.cloudinary.com/dlwpgtmcn/image/upload/v1744959380/tools_wrench_icon-1320087277641665992_bpwhq1.png"></img>
               <p>&nbsp; &nbsp; &nbsp;DEV</p>
             </div>
             <div>
-              <img src="https://res.cloudinary.com/dlwpgtmcn/image/upload/v1744959633/computer-131994967732477480_k3n3pg.png"></img>
+              <img alt="" src="https://res.cloudinary.com/dlwpgtmcn/image/upload/v1744959633/computer-131994967732477480_k3n3pg.png"></img>
               <p>&nbsp; &nbsp; &nbsp; &nbsp; UAT</p>
             </div>
             <div>
-              <img src="https://res.cloudinary.com/dlwpgtmcn/image/upload/v1744960132/cloud_cloud_computing_comment_communication_connection-1320086425914902674_0px_wg3xcw.svg"></img>
+              <img alt="" src="https://res.cloudinary.com/dlwpgtmcn/image/upload/v1744960132/cloud_cloud_computing_comment_communication_connection-1320086425914902674_0px_wg3xcw.svg"></img>
               <p>PRODUCTION</p>
             </div>
           </div>
@@ -144,8 +144,8 @@ const LandingPage = () => {
           <div class="footer-content">
             <div class="footer-content-column">
               <div class="footer-logo">
-                <a class="footer-logo-link" href="#">
-                  <img
+                <a class="footer-logo-link" href="/">
+                  <img alt=""
                     style={{ height: "100px", width: "150px" }}
                     src="https://res.cloudinary.com/dlwpgtmcn/image/upload/v1745214431/f2bf43_77052e2900804419a8f22fd7cd33d292_mv2_jrpzzg.png"
                   ></img>
@@ -155,13 +155,13 @@ const LandingPage = () => {
                 <h2 class="footer-menu-name"> Get Started</h2>
                 <ul id="menu-get-started" class="footer-menu-list">
                   <li class="menu-item menu-item-type-post_type menu-item-object-product">
-                    <a href="#">Start</a>
+                    <a href="/">Start</a>
                   </li>
                   <li class="menu-item menu-item-type-post_type menu-item-object-product">
-                    <a href="#">Documentation</a>
+                    <a href="/">Documentation</a>
                   </li>
                   <li class="menu-item menu-item-type-post_type menu-item-object-product">
-                    <a href="#">Installation</a>
+                    <a href="/">Installation</a>
                   </li>
                 </ul>
               </div>
@@ -171,13 +171,13 @@ const LandingPage = () => {
                 <h2 class="footer-menu-name"> Company</h2>
                 <ul id="menu-company" class="footer-menu-list">
                   <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                    <a href="#">Contact</a>
+                    <a href="/">Contact</a>
                   </li>
                   <li class="menu-item menu-item-type-taxonomy menu-item-object-category">
-                    <a href="#">News</a>
+                    <a href="/">News</a>
                   </li>
                   <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                    <a href="#">Careers</a>
+                    <a href="/">Careers</a>
                   </li>
                 </ul>
               </div>
@@ -185,10 +185,10 @@ const LandingPage = () => {
                 <h2 class="footer-menu-name"> Legal</h2>
                 <ul id="menu-legal" class="footer-menu-list">
                   <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-170434">
-                    <a href="#">Privacy Notice</a>
+                    <a href="/">Privacy Notice</a>
                   </li>
                   <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                    <a href="#">Terms of Use</a>
+                    <a href="/">Terms of Use</a>
                   </li>
                 </ul>
               </div>
@@ -198,26 +198,26 @@ const LandingPage = () => {
                 <h2 class="footer-menu-name"> Quick Links</h2>
                 <ul id="menu-quick-links" class="footer-menu-list">
                   <li class="menu-item menu-item-type-custom menu-item-object-custom">
-                    <a target="_blank" rel="noopener noreferrer" href="#">
+                    <a target="_blank" rel="noopener noreferrer" href="/">
                       Support Center
                     </a>
                   </li>
                   <li class="menu-item menu-item-type-custom menu-item-object-custom">
-                    <a target="_blank" rel="noopener noreferrer" href="#">
+                    <a target="_blank" rel="noopener noreferrer" href="/">
                       Service Status
                     </a>
                   </li>
                   <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                    <a href="#">Security</a>
+                    <a href="/">Security</a>
                   </li>
                   <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                    <a href="#">Blog</a>
+                    <a href="/">Blog</a>
                   </li>
                   <li class="menu-item menu-item-type-post_type_archive menu-item-object-customer">
-                    <a href="#">Customers</a>
+                    <a href="/">Customers</a>
                   </li>
                   <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                    <a href="#">Reviews</a>
+                    <a href="/">Reviews</a>
                   </li>
                 </ul>
               </div>
@@ -231,7 +231,7 @@ const LandingPage = () => {
                 </p>
                 <a
                   class="footer-call-to-action-button button"
-                  href="#"
+                  href="/"
                   target="_self"
                 >
                   {" "}
@@ -257,7 +257,7 @@ const LandingPage = () => {
           <div class="footer-copyright">
             <div class="footer-copyright-wrapper">
               <p class="footer-copyright-text">
-                <a class="footer-copyright-link" href="#" target="_self">
+                <a class="footer-copyright-link" href="/" target="_self">
                   ©2025. | All rights reserved.
                 </a>
               </p>

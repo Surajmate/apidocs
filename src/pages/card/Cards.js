@@ -8,7 +8,7 @@ const Cards = () => {
           <img
             class="card__background"
             src="https://vidhilegalpolicy.in/wp-content/uploads/2021/12/encryption-security-infosec-illustration-getty-1.jpg"
-            alt="Photo of Cartagena's cathedral at the background and some colonial style houses"
+            alt="dataImg"
             width="1920"
             height="2193"
           />
@@ -26,7 +26,7 @@ const Cards = () => {
           <img
             class="card__background"
             src="https://routemobile.b-cdn.net/wp-content/uploads/2020/03/Blog-icons-_Mobile-identity-is-a-new-face-for-Digital-authentication.svg"
-            alt="Photo of Cartagena's cathedral at the background and some colonial style houses"
+            alt="dataImg"
             width="1920"
             height="2193"
           />
@@ -44,7 +44,7 @@ const Cards = () => {
           <img
             class="card__background"
             src="https://www.chicagoinstituteofbusiness.com/blog/sales.jpg"
-            alt="Photo of Cartagena's cathedral at the background and some colonial style houses"
+            alt="dataImg"
             width="1920"
             height="2193"
           />
@@ -62,7 +62,7 @@ const Cards = () => {
           <img
             class="card__background"
             src="https://img.freepik.com/free-vector/flat-design-illustration-customer-support_23-2148887720.jpg?semt=ais_hybrid&w=740"
-            alt="Photo of Cartagena's cathedral at the background and some colonial style houses"
+            alt="dataImg"
             width="1920"
             height="2193"
           />
