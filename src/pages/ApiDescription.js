@@ -5,7 +5,6 @@ import { coy } from "react-syntax-highlighter/dist/esm/styles/prism";
 import remarkGfm from "remark-gfm";
 import ExpandComponent from "../components/ExpandComponent";
 import Navbar from "./Navbar";
-import "./LandingPage.css";
 import "./ApiDescription.css";
 import "./Sidebar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
