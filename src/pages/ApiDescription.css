@@ -1,4 +1,3 @@
-/* General Styling */
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f7fa;
@@ -7,7 +6,6 @@ body {
   padding: 0;
 }
 
-/* Container */
 .api-details-container {
   max-width: 1200px;
   margin: 2rem auto;
@@ -41,7 +39,6 @@ body {
   background-color: #0088cc;
 }
 
-/* Method + URL */
 .api-method-url {
   display: flex;
   background-color: #171c24;
@@ -79,19 +76,12 @@ body {
   padding: 0.3rem 0.8rem;
   border-radius: 4px;
   margin-right: 1rem;
-  /* background: #F9FBFF;
-  color: #007bff;
-  padding: 5px 10px 5px 15px;
-  border: 1px solid #007bff;
-  border-radius: 5px;
-  margin-right: 20px; */
 }
 
 .endpoint-url {
   word-break: break-all;
 }
 
-/* Section Headings */
 .section-heading {
   font-size: 1.5rem;
   margin-top: 2rem;
@@ -101,7 +91,6 @@ body {
   padding-left: 10px;
 }
 
-/* Parameters */
 .parameter-group {
   display: flex;
   flex-direction: column;
@@ -130,7 +119,6 @@ body {
   font-weight: 500;
 }
 
-/* Language Tabs */
 .language-tabs {
   display: flex;
   flex-wrap: wrap;
@@ -162,7 +150,6 @@ body {
   transform: scale(1.1);
 }
 
-/* Code Snippet Box */
 .code-box {
   background-color: #1e1e1e;
   color: white;
@@ -175,7 +162,6 @@ body {
   box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.05);
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .api-details-container {
     padding: 1rem;
@@ -211,7 +197,6 @@ body {
   justify-content: space-between;
   padding: 0.5em 0;
   font-weight: bold;
-  /* border-bottom: 1px solid #ccc; */
 }
 
 .accordion-body {
@@ -231,7 +216,6 @@ body {
 }
 
 .accordion-subitem:hover {
-  /* color: #fff; */
   text-decoration: underline;
 }
 
@@ -254,17 +238,13 @@ body {
   border-radius: 10px;
 }
 
-/* Hide all scrollbars on the entire page */
 * {
   scrollbar-width: none;
-  /* Firefox */
   -ms-overflow-style: none;
-  /* IE and Edge */
 }
 
 *::-webkit-scrollbar {
   display: none;
-  /* Chrome, Safari, Opera */
 }
 
 .row {
@@ -274,36 +254,29 @@ body {
 
 .colStyle::-webkit-scrollbar {
   display: none;
-  /* Chrome, Safari, Opera */
 }
 
-* Padding */
 .px-2 {
-  padding-left: 0.5rem;   /* 8px */
+  padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
  
 .py-1 {
-  padding-top: 0.25rem;   /* 4px */
+  padding-top: 0.25rem;
   padding-bottom: 0.25rem;
 }
  
-/* Border radius */
 .rounded-full {
   border-radius: 9999px;
 }
  
-/* Font size */
 .text-sm {
   font-size: 0.875rem;
 }
  
-/* Font weight */
 .font-medium {
   font-weight: 500;
 }
- 
-/* Background and text colors */
 
 .get {
   color: #6BDD9A;
