@@ -10,6 +10,7 @@ import "./ApiDescription.css";
 import "./Sidebar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes, faFolder } from "@fortawesome/free-solid-svg-icons";
+import collection from "../data/Mulesoft.postman_collection.json"
 
 const methodColors = {
   GET: "get",
@@ -139,10 +140,10 @@ const ApiDescription = () => {
   const [isOpen, setIsOpen] = useState(false);
   const handleTrigger = () => setIsOpen(!isOpen);
 
+
   useEffect(() => {
-    const response = JSON.parse(
-      localStorage.getItem("postman_collection") || "{}"
-    );
+    
+    const response = collection;
     setApiList(response);
     if (response.item && response.item.length > 0) {
       let obj = {
