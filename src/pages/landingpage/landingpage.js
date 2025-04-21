@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./landingpage.css"
 import Navbar from "../Navbar/Navbar";
 import Cards from "../card/Cards";
+import favouriteIndianLogo from "../../data/favourite-indian.png";
 
 const LandingPage = () => {
   // const navigate = useNavigate();
@@ -82,7 +83,7 @@ const LandingPage = () => {
               <h1 className="f-style">Works?</h1>
             </span>
             Get your developers onboard, very quickly. Learn how to incorporate
-            our ICICI Bank APIs in just few easy steps.
+            our Bajaj APIs in just few easy steps.
           </div>
           <div className="how-it-work-div-two">
             <div>
@@ -146,8 +147,8 @@ const LandingPage = () => {
               <div class="footer-logo">
                 <a class="footer-logo-link" href="/">
                   <img alt=""
-                    style={{ height: "100px", width: "150px" }}
-                    src="https://res.cloudinary.com/dlwpgtmcn/image/upload/v1745214431/f2bf43_77052e2900804419a8f22fd7cd33d292_mv2_jrpzzg.png"
+                    style={{ height: "90px", width: "100%", marginLeft: "-12px" }}
+                    src={favouriteIndianLogo}
                   ></img>
                 </a>
               </div>
@@ -159,9 +160,6 @@ const LandingPage = () => {
                   </li>
                   <li class="menu-item menu-item-type-post_type menu-item-object-product">
                     <a href="/">Documentation</a>
-                  </li>
-                  <li class="menu-item menu-item-type-post_type menu-item-object-product">
-                    <a href="/">Installation</a>
                   </li>
                 </ul>
               </div>
@@ -175,9 +173,6 @@ const LandingPage = () => {
                   </li>
                   <li class="menu-item menu-item-type-taxonomy menu-item-object-category">
                     <a href="/">News</a>
-                  </li>
-                  <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                    <a href="/">Careers</a>
                   </li>
                 </ul>
               </div>
@@ -237,20 +232,6 @@ const LandingPage = () => {
                   {" "}
                   Get in Touch{" "}
                 </a>
-              </div>
-              <div class="footer-call-to-action">
-                <h2 class="footer-call-to-action-title"> You Call Us</h2>
-                <p class="footer-call-to-action-link-wrapper">
-                  {" "}
-                  <a
-                    class="footer-call-to-action-link"
-                    href="tel:0124-64XXXX"
-                    target="_self"
-                  >
-                    {" "}
-                    0124-64XXXX{" "}
-                  </a>
-                </p>
               </div>
             </div>
           </div>
