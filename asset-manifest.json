@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/apidocs/static/css/main.3c478731.css",
-    "main.js": "/apidocs/static/js/main.9f0f1ef8.js",
-    "static/js/453.29ce6e02.chunk.js": "/apidocs/static/js/453.29ce6e02.chunk.js",
-    "index.html": "/apidocs/index.html",
-    "main.3c478731.css.map": "/apidocs/static/css/main.3c478731.css.map",
-    "main.9f0f1ef8.js.map": "/apidocs/static/js/main.9f0f1ef8.js.map",
-    "453.29ce6e02.chunk.js.map": "/apidocs/static/js/453.29ce6e02.chunk.js.map"
+    "main.css": "/static/css/main.42af3a96.css",
+    "main.js": "/static/js/main.9c82235b.js",
+    "static/js/453.29ce6e02.chunk.js": "/static/js/453.29ce6e02.chunk.js",
+    "index.html": "/index.html",
+    "main.42af3a96.css.map": "/static/css/main.42af3a96.css.map",
+    "main.9c82235b.js.map": "/static/js/main.9c82235b.js.map",
+    "453.29ce6e02.chunk.js.map": "/static/js/453.29ce6e02.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3c478731.css",
-    "static/js/main.9f0f1ef8.js"
+    "static/css/main.42af3a96.css",
+    "static/js/main.9c82235b.js"
   ]
 }
