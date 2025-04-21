@@ -2,7 +2,7 @@
   "name": "apidocs",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://surajmate.github.io/apidocs/",
+  "homepage": "https://surajmate.github.io/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",

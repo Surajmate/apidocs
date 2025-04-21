@@ -3,13 +3,13 @@ import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coy } from "react-syntax-highlighter/dist/esm/styles/prism";
 import remarkGfm from "remark-gfm";
-import ExpandComponent from "../components/ExpandComponent";
-import Navbar from "./Navbar";
+import ExpandComponent from "../../components/ExpandComponent";
+import Navbar from "../Navbar/Navbar";
 import "./ApiDescription.css";
 import "./Sidebar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes, faFolder } from "@fortawesome/free-solid-svg-icons";
-import collection from "../data/Mulesoft.postman_collection.json"
+import collection from "../../data/Mulesoft.postman_collection.json"
 
 const methodColors = {
   GET: "get",

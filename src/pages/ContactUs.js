@@ -5,7 +5,7 @@ import { FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa';
 const ContactUs = () => {
   return (
     <div className="contact-page">
-      <h1>Contact Us</h1>
+      <h1 className="headProp" >Contact Us</h1>
 
       <form className="contact-form">
         <div className="input-group">
