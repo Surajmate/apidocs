@@ -1,15 +1,9 @@
-/* ---------------------- */
-/* Base Layout & Typography */
-/* ---------------------- */
 .landing-container {
   background-color: black;
   color: rgb(34, 167, 255);
   font-family: Arial, sans-serif;
 }
 
-/* ---------------------- */
-/* Image Slider */
-/* ---------------------- */
 .image-slider {
   width: 1500px;
   display: flex;
@@ -23,12 +17,8 @@
 .slider-img {
   width: 49%;
   height: 500px;
-  /* object-fit: contain; */
 }
 
-/* ---------------------- */
-/* Available APIs Section */
-/* ---------------------- */
 .available-apis-section {
   margin: 30px 20px;
   display: flex;
@@ -42,7 +32,6 @@
   color: rgb(141, 32, 32);
 }
 
-/* Each Category */
 .accordion-category {
   background-color: transparent;
   margin: 0;
@@ -50,7 +39,6 @@
   border-bottom: 1px solid #444;
 }
 
-/* Category Header */
 .accordion-header {
   display: flex;
   justify-content: space-between;
@@ -59,22 +47,15 @@
   color: #ffcc00;
 }
 
-/* API Item */
 .accordion-api-item {
   padding: 6px 10px;
-  /* background-color: #3a3a3a; */
   margin: 4px 0;
   font-size: 13px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.2s;
 }
-/* 
-.accordion-api-item:hover {
-  background-color: #4c4c4c;
-} */
 
-/* View All Button */
 .view-all-toggle {
   text-align: center;
   margin-top: 10px;
@@ -90,7 +71,6 @@
   border-radius: 30px;
 }
 
-
 .contact-link {
   color: #007BFF;
   text-decoration: none;
@@ -99,7 +79,6 @@
 .contact-link:hover {
   text-decoration: underline;
 }
-
 
 .contact-section {
   background-color: #cad0d7;
@@ -170,9 +149,7 @@
   color: #0056b3;
   transform: scale(1.2);
 }
-/* ---------------------- */
-/* Modal Overlay */
-/* ---------------------- */
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -186,7 +163,6 @@
   z-index: 999;
 }
 
-/* Modal Container */
 .modal {
   background: white;
   padding: 30px;
@@ -197,7 +173,6 @@
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
 }
 
-/* Close Button */
 .close-btn {
   position: absolute;
   top: 10px;
@@ -208,14 +183,12 @@
   cursor: pointer;
 }
 
-/* Modal Heading */
 .modal h2 {
   text-align: center;
   color: #151c50;
   margin-bottom: 20px;
 }
 
-/* Modal Form Inputs */
 .modal-form input {
   width: 100%;
   padding: 10px 12px;
@@ -224,7 +197,6 @@
   border-radius: 5px;
 }
 
-/* Submit Button */
 .submit-btn {
   width: 100%;
   padding: 10px;
@@ -239,7 +211,6 @@
   background-color: #1a2584;
 }
 
-/* Toggle Login/Signup Link */
 .toggle-text {
   text-align: center;
   font-size: 14px;
@@ -257,10 +228,6 @@
   text-decoration: underline;
 }
 
-
-----------------------
-/* Feedback Section */
-/* ---------------------- */
 .feedback-form {
   margin-top: 30px;
   background-color: #000000;
