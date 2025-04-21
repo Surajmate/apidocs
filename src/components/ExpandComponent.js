@@ -5,7 +5,7 @@ const ExpandComponent = ({ obj }) => {
     const handleExpand = (key) => {
         setExpandKey((prev) => {
             if (prev.includes(key)) {
-                return prev.filter(k => k != key);
+                return prev.filter(k => k !== key);
             } else {
                 return [...prev, key];
             }
@@ -15,7 +15,7 @@ const ExpandComponent = ({ obj }) => {
         <div className="properties-container">
             {Object.keys(obj).map((key, index) => (
                 <div className="property-container" key={index}>
-                    {typeof obj[key] != 'object' &&
+                    {typeof obj[key] !== 'object' &&
                         <div className="property-row">
                             <span className="property-name">{key}</span>
                             <span className="property-type">{typeof obj[key]}</span>
