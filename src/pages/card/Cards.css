@@ -27,6 +27,7 @@
 }
 
 .card__content {color: white;
+  width: 100%;
   --flow-space: 0.9375rem;
   display: flex;
   flex-direction: column;
