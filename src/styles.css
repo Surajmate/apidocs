@@ -1,3 +1,4 @@
+/* Global Reset and Body Styling */
 * {
   margin: 0;
   padding: 0;
@@ -10,6 +11,7 @@ body {
   color: #333;
 }
 
+/* Button Styling */
 button {
   background-color: #007bff;
   color: white;
@@ -30,11 +32,13 @@ button:focus {
   outline: none;
 }
 
+/* Links */
 a {
   text-decoration: none;
   color: inherit;
 }
 
+/* Common card styles */
 .card {
   width: 250px;
   padding: 20px;
@@ -50,6 +54,7 @@ a {
   transform: translateY(-5px);
 }
 
+/* Header Styling */
 h1, h2, h3 {
   color: #333;
 }
@@ -69,6 +74,7 @@ h3 {
   color: #007BFF;
 }
 
+/* Container for general layout */
 .container {
   max-width: 1200px;
   margin: 50px auto;

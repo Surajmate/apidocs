@@ -24,7 +24,7 @@ const ApiMethodChip = ({ method }) => {
 
   return (
     <span
-      className={`px-2 py-1 rounded-full text-sm font-medium ${colorClasses}`}
+      className={`px-2 py-1 mt-2 text-sm font-medium ${colorClasses}`}
     >
       {method}
     </span>
@@ -153,6 +153,11 @@ const ApiDescription = () => {
     }
   }, []);
 
+  useEffect(() => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop= "100px";
+  }, [apiData?.request?.description]);
+
   const handleApiClick = (data) => {
     setApiData(data);
   };
@@ -232,28 +237,21 @@ const ApiDescription = () => {
                 ) || "No description available."}
                 {apiData?.request?.url && (
                   <div className="">
-                    <div className="api-method-url mx-3">
-                      {/* <div class="a_url row">
-                <div class="a_url_header">
-                  <div class="a_url_header_inner">
-                  <div class="a_url_txt">URL</div>
-                  <div class="a_url_copy_url copyclip" id="copyurlData" data-clipboard-target="#apiurl"><img src="https://icongr.am/clarity/copy.svg?color=0000FF" alt="Icon"/></div>
-                  </div>
-                </div>
-                <div class="a_full_url">
-                  <div class="a_full_url_inner">
-                  <span class="l_method ">
-                  {apiData?.request?.method}	</span>
-                <span id="apiurl" class="apiurl_s copyurl">{apiData?.request?.url}</span>
-                    </div>
-                </div>
-              </div> */}
-                      <span className="method-tag">
+                    <div className="api-method-url">
+                      <div class="a_url">
+                        <div class="a_full_url">
+                          <div class="a_full_url_inner">
+                            <ApiMethodChip className="space-x-2" method={apiData?.request?.method} />
+                            <span id="apiurl" class="apiurl_s copyurl">{apiData?.request?.url}</span>
+                          </div>
+                        </div>
+                      </div>
+                      {/* <span className="method-tag">
                         {apiData?.request?.method}
                       </span>
                       <span className="endpoint-url pt-1">
                         {apiData?.request?.url}
-                      </span>
+                      </span> */}
                     </div>
                     <div className="row g-0">
                       <div className="col-5 p-3">
@@ -420,12 +418,12 @@ const ApiDescription = () => {
                     <li key={index} className="accordion-item">
                       <div
                         className="accordion-header"
-                        onClick={() => toggleAccordion(index)}
+                        onClick={() => {toggleAccordion(index); setApiData({
+                          name: entry.name || "",
+                          request: { description: entry.description || "" },
+                        });}}
                       >
                         <strong>{entry.name}</strong>
-                        <span>
-                          {expandedCategoryIndex === index ? "▲" : "▼"}
-                        </span>
                       </div>
 
                       {expandedCategoryIndex === index && (
@@ -440,13 +438,14 @@ const ApiDescription = () => {
                                       <li key={index2}>
                                         <div
                                           className="accordion-subitem"
-                                          onClick={() => handleApiClick(entry1)}
+                                          onClick={() => {handleApiClick(entry1); handleTrigger()}}
+                                          
                                         >
                                           <ApiMethodChip
                                             className="space-x-2"
                                             method={entry1.request.method}
                                           />
-                                          <strong onClick={handleTrigger}>
+                                          <strong>
                                             {" "}
                                             {entry1.name}
                                           </strong>
