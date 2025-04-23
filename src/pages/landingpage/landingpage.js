@@ -51,7 +51,7 @@ const LandingPage = () => {
         <div className="banner">
           <div className="banner-content">
             <h1>
-              Bajaj API Documentation <br />
+              Bajaj API Developer Portal <br />
             </h1>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -123,7 +123,7 @@ const LandingPage = () => {
           </div>
           <div className="Journey-to-go-Live-three">
             <p>
-              Signup to Bajaj API Banking Portal Sandbox environment to start
+              Signup to Bajaj API Developer Portal Sandbox environment to start
               your journey. Upgrade to UAT environment for end to end real time
               testing , post your NDA with us. Go-live with integration to
               production environment.

@@ -137,7 +137,10 @@ const ApiDescription = () => {
   const [showLang, setShowLang] = useState("cURL");
   const [expandedCategoryIndex, setExpandedCategoryIndex] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  const handleTrigger = () => setIsOpen(!isOpen);
+  const handleTrigger = () => {
+    setIsOpen(!isOpen);
+    setSampleresponse({ body: null, lang: null, code: null });
+  }
 
 
   useEffect(() => {
@@ -175,17 +178,17 @@ const ApiDescription = () => {
   const hnadleSampleresponse = (code) => {
     let found = false;
     for (let item of apiData.response) {
-      if (item.code === code) {
+      if (item.code === 200) {
         found = true;
         setSampleresponse({
           body: item.body,
           lang: item._postman_previewlanguage,
-          code: code,
+          code: code
         });
       }
     }
     if (!found) {
-      setSampleresponse({ body: null, lang: null });
+      setSampleresponse({ body: null, lang: null, code: null });
     }
   };
 
@@ -194,8 +197,7 @@ const ApiDescription = () => {
       <div className="page">
         <div className="content p-0">
           <Navbar />
-          <div
-            className="description-container colStyle"
+          <div className={`description-container colStyle ${isOpen ? "ml-side" : "n-ml-side"}`}
             style={{ padding: "10px 200px" }}
           >
             {apiData.name ? (
@@ -246,32 +248,34 @@ const ApiDescription = () => {
                           </div>
                         </div>
                       </div>
-                      {/* <span className="method-tag">
-                        {apiData?.request?.method}
-                      </span>
-                      <span className="endpoint-url pt-1">
-                        {apiData?.request?.url}
-                      </span> */}
                     </div>
+
                     <div className="row g-0">
-                      <div className="col-5 p-3">
+
+                      <div className="col-12 p-3">
+
                         <div className="section-heading">Request Headers</div>
+
                         <div className="parameter-group">
                           {apiData.request.header?.map((param, index) => (
                             <div key={index} className="parameter-row">
                               <span className="parameter-name">
-                                {param.key}
-                              </span>
-                              <span className="parameter-type">
-                                {param.value}
-                              </span>
-                              <span className="parameter-required">
+                                {param.key} - <span className="parameter-required">
                                 {param.required ? "Required" : "Optional"}
                               </span>
+                              </span>
+                              <span className="parameter-type">
+                                {param.description}
+                              </span>
+                              {/* <span className="parameter-required">
+                                {param.required ? "Required" : "Optional"}
+                              </span> */}
                             </div>
                           ))}
                         </div>
+
                         <div className="section-heading">Request Body</div>
+
                         {apiData?.request?.body && (
                           <ExpandComponent
                             obj={JSON.parse(
@@ -281,6 +285,7 @@ const ApiDescription = () => {
                         )}
 
                         <div className="section-heading">Response Body</div>
+
                         {apiData?.request?.body && (
                           <ExpandComponent
                             obj={JSON.parse(
@@ -288,9 +293,9 @@ const ApiDescription = () => {
                             )}
                           />
                         )}
-                      </div>
-                      <div className="col-7 p-3">
+                     
                         <div className="section-heading">Languages</div>
+
                         <div className="language-tabs">
                           {Object.keys(languageMap).map((lang, index) => (
                             <img
@@ -311,6 +316,7 @@ const ApiDescription = () => {
                         </div>
 
                         <div className="section-heading">Request Sample</div>
+
                         <SyntaxHighlighter
                           className="code-box"
                           language={"javascript"}
@@ -326,9 +332,10 @@ const ApiDescription = () => {
                             )
                           )}
                         </SyntaxHighlighter>
+
                         <select
                           className="form-select mt-2 select-border"
-                          value={sampleresponse.code}
+                          value={sampleresponse}
                           name=""
                           id=""
                           onChange={(e) => hnadleSampleresponse(e.target.value)}
@@ -340,20 +347,19 @@ const ApiDescription = () => {
                             </option>
                           ))}
                         </select>
+
                         <div className="section-heading">Response</div>
-                        {/* {typeof apiData?.response === 'object' ? (
-                  <pre className="code-box">{apiData?.response || {}}</pre>
-                ) : (
-                  <pre className="code-box">{apiData?.response || {}}</pre>
-                )} */}
+                        
                         <SyntaxHighlighter
                           language={"javascript"}
                           style={coy}
                           showLineNumbers
                         >
-                          {sampleresponse.body || "{}"}
+                          {sampleresponse.body}
                         </SyntaxHighlighter>
+
                       </div>
+
                     </div>
                   </div>
                 )}
@@ -431,7 +437,7 @@ const ApiDescription = () => {
                           {entry?.item?.length > 0 ? (
                             entry.item.map((api, index1) => (
                               <div key={index1} className="accordion-api-item">
-                                <h6><FontAwesomeIcon className="FontAwesomeIcon" icon={faFolder} /> {api.name}</h6>
+                                <h6 className="tagDesign"><FontAwesomeIcon className="FontAwesomeIcon" icon={faFolder} /> {api.name}</h6>
                                 {Array.isArray(api.item) ? (
                                   <ul>
                                     {api.item.map((entry1, index2) => (
@@ -458,7 +464,7 @@ const ApiDescription = () => {
                                     <li key={index1}>
                                       <div
                                         className="accordion-subitem"
-                                        onClick={() => handleApiClick(api)}
+                                        onClick={() => {handleApiClick(api); handleTrigger()}}
                                       >
                                       <ApiMethodChip
                                         className="space-x-2"
@@ -471,9 +477,8 @@ const ApiDescription = () => {
                                 )}
                               </div>
                             ))
-                          ) : (
-                            <p>No items found in the collection.</p>
-                          )}
+                          ) : ('')} 
+                          {/* collection data not found */}
                         </div>
                       )}
                     </li>
