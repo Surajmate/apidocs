@@ -112,7 +112,7 @@
   .card:focus-within .card__content--container > :not(.card__title) {
     opacity: 1;
     transition: opacity 500ms ease-in;
-    transition-delay: 1000ms;
+    transition-delay: 500ms;
   }
 
   .card:hover .card__title::after,

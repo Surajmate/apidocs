@@ -4,7 +4,8 @@ import LandingPage from './pages/landingpage/landingpage';
 import ContactUs from './pages/ContactUs'; 
 import FaqPage from './pages/FaqPage';
 import ApiDescription from './pages/Apidescription/ApiDescription';
-import LoginPage from './pages/LoginPage'; 
+import LoginPage from './pages/Auth/LoginPage';
+import SignupPage from './pages/Auth/SignupPage';
 import './pages/App.css';
 
 const App = () => {
@@ -16,6 +17,8 @@ const App = () => {
         <Route path="/faq" element={<FaqPage />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/login" element={<LoginPage />} /> 
+        <Route path="/signup" element={<SignupPage />} /> 
+
       </Routes>
     </Router>
   );
