@@ -1,40 +1,48 @@
 import React, { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
+ import { useNavigate } from "react-router-dom";
 import "./landingpage.css"
 import Navbar from "../Navbar/Navbar";
 import Cards from "../card/Cards";
 import favouriteIndianLogo from "../../data/favourite-indian.png";
 
+const routeTo = (data = '') => {
+  console.log(data);
+};
+
 const LandingPage = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+
+  // const handleClick = (path = '/') => {
+  //   console.log(path);
+  //   navigate(path); // <-- your login page route
+  // };
 
   const images = [
     {
-      initial: "https://pngimg.com/uploads/car_wheel/car_wheel_PNG23301.png",
+      initial: "/assets/main-img-banner.png",
       hover:
         "https://truckcdn.cardekho.com/in/bajaj/compact-4s/bajaj-compact-4s-48935.jpg?impolicy=resize&imwidth=480",
       text: "3 WHEELERS ",
     },
     {
-      initial: "https://pngimg.com/uploads/car_wheel/car_wheel_PNG23301.png",
+      initial: "/assets/main-img-banner.png",
       hover:
         "https://cdn.bikedekho.com/processedimages/bajaj/bajaj-pulsar-200-ns/source/bajaj-pulsar-200-ns65df4e8f1a6e0.jpg",
       text: "MOTORCYCLES",
     },
     {
-      initial: "https://pngimg.com/uploads/car_wheel/car_wheel_PNG23301.png",
+      initial: "/assets/main-img-banner.png",
       hover: "https://truckcdn.cardekho.com/in/bajaj/qute/bajaj-qute-29389.jpg",
       text: "QUTE",
     },
     {
-      initial: "https://pngimg.com/uploads/car_wheel/car_wheel_PNG23301.png",
+      initial: "/assets/main-img-banner.png",
       hover:
         "https://cdn.bikedekho.com/processedimages/source/66da7273c6ef6.jpg",
       text: "CHETAK",
     },
   ];
-
-  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   // Preload hover images
   useEffect(() => {
@@ -50,14 +58,16 @@ const LandingPage = () => {
       <div className="container-fluid landingPage">
         <div className="banner">
           <div className="banner-content">
+            <h1 style={{ fontSize: "20px"}}>
+              Welcome to <br />
+            </h1>
             <h1>
               Bajaj API Developer Portal <br />
             </h1>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            — your one-stop destination for accessing, integrating, and managing powerful APIs that drive seamless digital experiences. Whether you're building customer journeys, or partner integrations, our APIs offer secure, scalable, and easy-to-use solutions to accelerate your development.
             </p>
-            <button>SignUp</button>
+            <button onClick={routeTo('/signup')}>SignUp</button>
           </div>
           <div className="image-container">
             <div className="gallery">
@@ -82,23 +92,34 @@ const LandingPage = () => {
               <div className="how-it">How it </div>
               <h1 className="f-style">Works?</h1>
             </span>
-            Get your developers onboard, very quickly. Learn how to incorporate
-            our Bajaj APIs in just few easy steps.
+            Onboard your developers effortlessly. Discover how easy it is to integrate Bajaj APIs in just a few simple steps.
           </div>
           <div className="how-it-work-div-two">
             <div>
-              <img alt="" src="https://preview.cruip.com/solid/dist/images/feature-icon-01.svg"></img>
+              <img
+                style={{ paddingLeft: "20px", height: "115px", width: "115px" }}
+                alt=""
+                src="\assets\vecteezy_user-3d-graphic-illustration_42156821_dsbnyu.png"
+              ></img>
               <p>
-                1.Sign up for an Bajaj <br></br>Developer Account.
+                1.Sign up for Bajaj <br></br>Developer Account.
               </p>
             </div>
             <div>
-              <img alt="" src="https://preview.cruip.com/solid/dist/images/feature-icon-02.svg"></img>
-              <p>2.Select API</p>
+              <img
+                style={{ height: "150px", width: "150px" }}
+                alt=""
+                src="/assets/vecteezy_elegant-abstract-cloud-computing-distributed-network_56743178_xkwlg6.png"
+              ></img>
+              <p>&nbsp; &nbsp; &nbsp; 2.Select API</p>
             </div>
             <div>
-              <img alt="" src="https://preview.cruip.com/solid/dist/images/feature-icon-03.svg"></img>
-              <p>3.Test it Out</p>
+              <img
+                style={{ height: "140px", width: "140px" }}
+                alt=""
+                src="/assets/vecteezy_note-checklist-delivery-3d-illustration_23257669_nztffw.png"
+              ></img>
+              <p>&nbsp; &nbsp; &nbsp;3.Test it Out</p>
             </div>
           </div>
         </div>
@@ -123,10 +144,9 @@ const LandingPage = () => {
           </div>
           <div className="Journey-to-go-Live-three">
             <p>
-              Signup to Bajaj API Developer Portal Sandbox environment to start
-              your journey. Upgrade to UAT environment for end to end real time
-              testing , post your NDA with us. Go-live with integration to
-              production environment.
+            Sign up for the Bajaj API Developer Portal Sandbox to kickstart your development journey.
+Once your NDA is in place, upgrade to the UAT environment for comprehensive end-to-end testing.
+When you're ready, go live with full integration into the production environment.
             </p>
           </div>
         </div>

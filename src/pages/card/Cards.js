@@ -14,10 +14,9 @@ const Cards = () => {
           />
           <div class="card__content | flow">
             <div class="card__content--container | flow">
-              <h2 class="card__title">Encryption and Decryption</h2>
+              <h2 class="card__title">Encryption & Decryption</h2>
                <p class="card__description ">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum
-                in labore laudantium deserunt fugiat numquam.
+               Secure your data with industry-standard encryption and decryption mechanisms.
               </p> 
             </div>
           </div>
@@ -33,10 +32,9 @@ const Cards = () => {
           <div class="card__content | flow">
             <div class="card__content--container | flow">
               <h2 class="card__title">Auth</h2>
-              {/* <p class="card__description w-100">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum
-                in labore laudantium deserunt fugiat numquam.
-              </p> */}
+              <p class="card__description w-100">
+              Enable safe, token-based authentication and authorization for your applications.
+              </p>
             </div>
           </div>
         </article>
@@ -51,10 +49,9 @@ const Cards = () => {
           <div class="card__content | flow">
             <div class="card__content--container | flow">
               <h2 class="card__title">Sales API</h2>
-              {/* <p class="card__description w-100">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum
-                in labore laudantium deserunt fugiat numquam.
-              </p> */}
+              <p class="card__description w-100">
+              Access real-time data on bike models, availability, pricing, and dealer information.
+              </p>
             </div>
           </div>
         </article>
@@ -69,10 +66,9 @@ const Cards = () => {
           <div class="card__content | flow">
             <div class="card__content--container | flow">
               <h2 class="card__title">Service API</h2>
-              {/* <p class="card__description w-100">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum
-                in labore laudantium deserunt fugiat numquam.
-              </p> */}
+              <p class="card__description w-100">
+              Integrate service booking, maintenance history, and service center locators seamlessly.
+              </p>
             </div>
           </div>
         </article>
