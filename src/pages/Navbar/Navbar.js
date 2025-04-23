@@ -72,7 +72,8 @@ const Navbar = () => {
           <span onClick={() => navigate("/explore")}>EXPLORE APIS</span>
           {/* <span onClick={() => navigate("/contact")}>CONTACT US</span> */}
           <span onClick={() => navigate("/faq")}>FAQ</span>
-          {/* <span className="nav-login" onClick={() => setShowModal(true)}>LOGIN</span> */}
+          <span className="nav-login" onClick={() => navigate("/login")}>LOGIN</span>
+
         </div>
       </nav>
 
