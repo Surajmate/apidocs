@@ -1,15 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./LoginPage.css";
 import Navbar from "../Navbar/Navbar";
 
 const LoginPage = () => {
-
-
   const navigate = useNavigate();
-  const handleClick = () => {
-    navigate('/signup');
-  };
+
   return (
     <>
     <Navbar />
@@ -46,7 +42,7 @@ const LoginPage = () => {
     
                   <div className="signup-prompt">
                     Don’t have an account?{" "}
-                    <button onClick={handleClick} className="signup-link">
+                    <button onClick={() => navigate("/signup")} className="signup-link">
                       Sign Up
                     </button>
                   </div>

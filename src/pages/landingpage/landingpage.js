@@ -5,18 +5,9 @@ import Navbar from "../Navbar/Navbar";
 import Cards from "../card/Cards";
 import favouriteIndianLogo from "../../data/favourite-indian.png";
 
-const routeTo = (data = '') => {
-  console.log(data);
-};
-
 const LandingPage = () => {
   const navigate = useNavigate();
   const [hoveredIndex, setHoveredIndex] = useState(null);
-
-  // const handleClick = (path = '/') => {
-  //   console.log(path);
-  //   navigate(path); // <-- your login page route
-  // };
 
   const images = [
     {
@@ -67,7 +58,7 @@ const LandingPage = () => {
             <p>
             — your one-stop destination for accessing, integrating, and managing powerful APIs that drive seamless digital experiences. Whether you're building customer journeys, or partner integrations, our APIs offer secure, scalable, and easy-to-use solutions to accelerate your development.
             </p>
-            <button onClick={routeTo('/signup')}>SignUp</button>
+            <button onClick={() => navigate('/signup')}>SignUp</button>
           </div>
           <div className="image-container">
             <div className="gallery">
