@@ -1,53 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ContactUs.css';
-import { FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import Navbar from './Navbar/Navbar';
 
 const ContactUs = () => {
+  const [phone, setPhone] = useState("");
+
+  const handlePhoneChange = (e) => {
+    const value = e.target.value;
+    if (/^\d{0,10}$/.test(value)) {
+      setPhone(value);
+    }
+  };
+
   return (
-    <div className="contact-page">
-      <h1 className="headProp" >Contact Us</h1>
+    <div
+      style={{
+        backgroundImage: "url(/assets/4-contact.png)",
+        backgroundSize: "cover",
+        backgroundPosition: "top center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <div style={{ minHeight: "100vh" }}>
+        <Navbar />
 
-      <form className="contact-form">
-        <div className="input-group">
-          <label>Name</label>
-          <input type="text" placeholder="Your Name" required />
+        <div className="contact-page">
+          <h1 className="headProp">GET IN TOUCH</h1>
+
+          <form className="contact-form">
+            <div className="input-group">
+              <label>Name</label>
+              <input type="text" placeholder="Your Name" required />
+            </div>
+
+            <div className="input-group">
+              <label>Email</label>
+              <input type="email" placeholder="Your Email" required />
+            </div>
+
+            <div className="input-group">
+              <label>Phone</label>
+              <input
+                type="tel"
+                placeholder="Your Phone Number"
+                value={phone}
+                onChange={handlePhoneChange}
+                pattern="\d{10}"
+                title="Phone number must be exactly 10 digits"
+                required
+              />
+            </div>
+
+            <div className="input-group">
+              <label>Message</label>
+              <textarea
+                rows="4"
+                placeholder="Write your message..."
+                required
+              ></textarea>
+            </div>
+
+            <button type="submit" className="submit-btn">Submit</button>
+          </form>
         </div>
-
-        <div className="input-group">
-          <label>Email</label>
-          <input type="email" placeholder="Your Email" required />
-        </div>
-
-        <div className="input-group">
-          <label>Phone</label>
-          <input type="tel" placeholder="Your Phone Number" required />
-        </div>
-
-        <div className="input-group">
-          <label>Message</label>
-          <textarea rows="4" placeholder="Write your message..." required></textarea>
-        </div>
-
-        <button type="submit" className="submit-btn">Submit</button>
-      </form>
-
-      {/* Social Icons */}
-      <div className="social-icons">
-        <a href="https://www.facebook.com/BajajAutoLtdWFI/" target="_blank" rel="noopener noreferrer">
-          <FaFacebook />
-        </a>
-        <a href="https://www.instagram.com/bajaj_auto_ltd/?igshid=9mdtd6dprx16" target="_blank" rel="noopener noreferrer">
-          <FaInstagram />
-        </a>
-        <a href="https://www.linkedin.com/company/bajaj-auto-ltd/?originalSubdomain=in" target="_blank" rel="noopener noreferrer">
-          <FaLinkedin />
-        </a>
-      </div>
-
-      {/* Placeholder for About Us */}
-      <div className="about-us-section">
-        <h2>About Us</h2>
-        <p> {/* You'll send the content here. I'll insert it once you give it. */} </p>
       </div>
     </div>
   );
