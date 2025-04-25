@@ -8,20 +8,20 @@
 
 .App {
     text-align: center;
-  }
-  
-  .App-logo {
+}
+
+.App-logo {
     height: 40vmin;
     pointer-events: none;
-  }
-  
-  @media (prefers-reduced-motion: no-preference) {
+}
+
+@media (prefers-reduced-motion: no-preference) {
     .App-logo {
-      animation: App-logo-spin infinite 20s linear;
+        animation: App-logo-spin infinite 20s linear;
     }
-  }
-  
-  .App-header {
+}
+
+.App-header {
     background-color: #282c34;
     min-height: 100vh;
     display: flex;
@@ -30,36 +30,36 @@
     justify-content: center;
     font-size: calc(10px + 2vmin);
     color: white;
-  }
-  
-  .App-link {
+}
+
+.App-link {
     color: #61dafb;
-  }
-  
-  @keyframes App-logo-spin {
+}
+
+@keyframes App-logo-spin {
     from {
-      transform: rotate(0deg);
+        transform: rotate(0deg);
     }
-  
+
     to {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
-  
-  .descMarkdown {
+}
+
+.descMarkdown {
     overflow-wrap: break-word;
-  }
-  
-  .list-group-div {
+}
+
+.list-group-div {
     box-shadow: #282c34 0px 0px 10px 0px;
     border-radius: 10px;
     border-left: 1px solid black;
     height: 95vh;
     overflow-x: auto;
-  }
-  
-  /* sandbox css start */
-  .base-url-bg {
+}
+
+/* sandbox css start */
+.base-url-bg {
     padding: 18px 12px;
     border: 1px solid #053E27;
     background-color: #1F262E;
@@ -67,9 +67,9 @@
     border-top-right-radius: 15px;
     border-bottom-right-radius: 0px;
     border-bottom-left-radius: 0px;
-  }
-  
-  .bg-light-green {
+}
+
+.bg-light-green {
     background-color: #1F262E;
     border-radius: 10px;
     height: 80px;
@@ -78,149 +78,142 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-  
-  .border-request {
+}
+
+.border-request {
     border: 1px solid #053e27;
     margin-top: -8px;
     border-top: none;
-  }
-  
-  .white-badge {
+}
+
+.white-badge {
     background-color: white;
     padding: 1px 9px;
     border-radius: 15px;
-  }
-  
-  .Scroll-language {
+}
+
+.Scroll-language {
     -webkit-overflow-scrolling: touch;
     overflow-x: auto;
     white-space: nowrap;
-  }
-  
-  .anchor-color {
+}
+
+.anchor-color {
     color: #549BE0;
-  }
-  
-  /* dooted-section css */
-  
-  .main-container {
+}
+
+/* dooted-section css */
+.main-container {
     border-left: 1px dashed #cccccc;
     padding-top: .3rem;
     padding-bottom: .3rem;
-  
-  }
-  
-  .main-container:before {
+}
+
+.main-container:before {
     width: 18px;
     content: "";
     display: inline-block;
     border-top: 1px dashed #cccccc;
     vertical-align: middle;
     margin: auto 0;
-  }
-  
-  .main-container .property-name {
+}
+
+.main-container .property-name {
     vertical-align: middle;
     padding-left: 1rem;
-  }
-  
-  .main-container .property-type {
+}
+
+.main-container .property-type {
     vertical-align: middle !important;
     font-style: italic !important;
     opacity: .5 !important;
     padding-left: 1.5rem !important;
-  }
-  
-  .header-parameter .property-type {
+}
+
+.header-parameter .property-type {
     vertical-align: middle !important;
     font-style: italic !important;
     opacity: .5 !important;
-  }
-  
-  .main-container .required {
+}
+
+.main-container .required {
     color: #68cc19;
     vertical-align: middle;
     padding-left: 1.5rem;
-  }
-  
-  
-  .text-gray-500 {
+}
+
+.text-gray-500 {
     --tw-text-opacity: 1;
     color: rgb(107 114 128 / var(--tw-text-opacity, 1));
-  }
-  
-  
-  
-  .property-container .property-type {
+}
+
+.property-container .property-type {
     vertical-align: middle;
     font-style: italic;
     opacity: .5;
     padding-left: 1.5rem;
-  }
-  
-  
-  
-  .property-container {
+}
+
+.property-container {
     border-left: 1px dashed #000;
     margin-left: 2rem;
     padding-bottom: .7rem;
     padding-top: .7rem;
     position: relative;
-  }
-  
-  .property-container:before {
+}
+
+.property-container:before {
     border-top: 1px dashed #000;
     content: "";
     display: inline-block;
     margin: auto 0;
     vertical-align: middle;
     width: 18px;
-  }
-  
-  .property-row {
+}
+
+.property-row {
     left: 18px;
     position: absolute;
     top: 14px;
-  }
-  
-  .property-container .property-name {
+}
+
+.property-container .property-name {
     padding-left: 1rem;
     vertical-align: middle;
-  }
-  
-  .property-container .required {
+}
+
+.property-container .required {
     color: #68cc19;
     padding-left: 1.5rem;
     vertical-align: middle;
-  }
-  
-  /* dooted-section css */
-  .language-name-white {
+}
+
+/* dooted-section css */
+.language-name-white {
     color: white;
-  }
-  
-  .curl-code-request {
+}
+
+.curl-code-request {
     background-color: #1F262E;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
-  }
-  
-  .light-info-color {
+}
+
+.light-info-color {
     color: #43E0F7;
-  }
-  
-  .select-border {
+}
+
+.select-border {
     border: 1px solid #3f51b5;
     border-radius: 15px;
     background-color: #1F262E;
     padding: 18px 12px;
     color: white;
-  }
-  
-  .select-border {
+}
+
+.select-border {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -232,68 +225,74 @@
     color: white;
     background-color: #28323D;
     border-radius: 10px;
-  }
-  
-  .post-url-bg {
+}
+
+.post-url-bg {
     background-color: #1F262E;
     padding: 18px 12px;
     border-radius: 15px;
-  }
-  
-  .Request-Sample-bg {
+}
+
+.Request-Sample-bg {
     padding: 18px 12px;
     background-color: #28323D;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 0px;
     border-bottom-left-radius: 0px;
-  }
-  
-  .btn-explore {
+}
+
+.btn-explore {
     background-color: #006AD0;
     color: white;
     border-radius: 0px;
-  }
-  
-  .btn-explore:hover {
+}
+
+.btn-explore:hover {
     background-color: white;
     color: #006AD0;
     border-radius: 0px;
     border: 1px solid #006AD0;
-  }
-  
-  .heading-color {
+}
+
+.heading-color {
     color: #495A6E;
-  }
-  
-  .line-bottom {
+}
+
+.line-bottom {
     border: 1px solid #bebebe;
-  }
-  
-  .sandbox-div {
+}
+
+.sandbox-div {
     max-height: 95vh;
     overflow-y: auto;
-  }
-  
-  .markdown {
-    word-break: break-word;
-  }
-
-  /* Hide all scrollbars on the entire page */
-* {
-  scrollbar-width: none;           /* Firefox */
-  -ms-overflow-style: none;        /* IE and Edge */
 }
+
+.markdown {
+    word-break: break-word;
+}
+
 
 *::-webkit-scrollbar {
-  display: none;                   /* Chrome, Safari, Opera */
+  display: none; 
 }
 
-.colStyle{
+.colStyle {
   overflow-y: auto !important;
   height: 735px !important;
 }
 
+/* Show scrollbar for .colStyle */
 .colStyle::-webkit-scrollbar {
-  display: none;                   /* Chrome, Safari, Opera */
+  display: block; 
+  width: 8px;
+}
+
+.colStyle::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  border-radius: 10px;
+}
+
+.colStyle::-webkit-scrollbar-track {
+  background: #f1f1f1;
 }

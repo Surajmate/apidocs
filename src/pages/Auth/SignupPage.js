@@ -1,14 +1,26 @@
-import React from "react";
-// import React, { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./LoginPage.css";
 import Navbar from "../Navbar/Navbar";
+
+
+
+
+
+
+
 
 // const submit = () => {
 //   console.log("Form submitted with email:", email, "and password:", password);
 // }
 
 const SignupPage = () => {
+
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = (e) => {
+    setIsChecked(e.target.checked);
+  };
   const navigate = useNavigate();
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
@@ -54,16 +66,32 @@ const SignupPage = () => {
                 <input type="password" id="confirm-password" placeholder="Confirm your password"/>
               </div> */}
 
-            <div className="form-group">
-              <label htmlFor="terms">
-                <input type="checkbox" id="terms" /> I agree to the terms and
-                conditions & privacy policy
-              </label>
-            </div>
+<div className="form-group">
+      <span style={{ display: 'flex', alignItems: 'center' }}>
+        <input
+          style={{ height: '15px', width: '15px', margin: '5px' }}
+          type="checkbox"
+          id="terms"
+          onChange={handleCheckboxChange}
+        />
+        <p style={{ margin: 0 }}>
+          I agree to the terms and conditions & privacy policy
+        </p>
+      </span>
+      </div>
+      <button
+        type="submit"
+        className="login-button"
+        disabled={!isChecked}
+        style={{
+          backgroundColor: isChecked ? '#007bff' : '#007bff43',
+          cursor: isChecked ? 'pointer' : 'not-allowed',
+        }}
+      >
+        Sign Up
+      </button>
+    
 
-            <button type="submit" className="login-button">
-              Sign Up
-            </button>
 
             <div className="signup-prompt">
               Already have an account?{" "}
