@@ -137,8 +137,15 @@ const ApiDescription = () => {
   const [showLang, setShowLang] = useState("cURL");
   const [expandedCategoryIndex, setExpandedCategoryIndex] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+
+
+
+  const toggleDiv = () => {
+    setIsOpen(prev => !prev);
+  };
   const handleTrigger = () => {
     setIsOpen(!isOpen);
+    console.log(isOpen);
     setSampleresponse({ body: null, lang: null, code: null });
   }
 
@@ -192,14 +199,17 @@ const ApiDescription = () => {
     }
   };
 
+  
+
   return (
     <div className="special-gothic-regular container-fluid p-0 m-0">
       <div className="page">
         <div className="content p-0">
           <Navbar />
           <div className={`description-container colStyle ${isOpen ? "ml-side" : "n-ml-side"}`}
-            style={{ padding: "10px 200px" }}
-          >
+     style={{ padding: "10px 200px", height: "calc(100vh - 60px)", overflowY: "auto" }}>
+
+
             {apiData.name ? (
               <div className="mt-2">
                 <h1>{apiData.name}</h1>
@@ -249,10 +259,6 @@ const ApiDescription = () => {
                         </div>
                       </div>
                     </div>
-
-                    <div className="row g-0">
-
-                      <div className="col-12 p-3">
 
                         <div className="section-heading">Request Headers</div>
 
@@ -359,9 +365,6 @@ const ApiDescription = () => {
                         </SyntaxHighlighter>
 
                       </div>
-
-                    </div>
-                  </div>
                 )}
               </div>
             ) : (
@@ -412,11 +415,21 @@ const ApiDescription = () => {
             
         <div className={`logo ${isOpen ? "" : "d-none"}`}>
           <img src="/assets/logo.png" alt="BikeAPI Logo" className="logo-img"/>
-        </div>
-          <FontAwesomeIcon className="FontAwesomeIcon" icon={isOpen ? faTimes : faBars} />
+          
+        </div>     
+         <div onClick={toggleDiv} style={{ cursor: 'pointer' }}>
+          <FontAwesomeIcon className="FontAwesomeIcon" icon={isOpen ? faTimes : faBars} /></div>
           </div>
 
-          <div className="available-apis-section text-white">
+          <div
+        className="available-apis-section text-white"
+        style={{
+          display: isOpen ? 'block':'none',
+          scrollbarColor: '#fff #151c50',
+          maxHeight: '100vh',
+        }}
+      >
+
             <div className="accordion-container">
               {Array.isArray(apiList.item) ? (
                 <ul className="accordion-list">
