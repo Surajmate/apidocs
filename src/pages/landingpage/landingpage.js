@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
  import { useNavigate } from "react-router-dom";
 import "./landingpage.css"
 import Navbar from "../Navbar/Navbar";
+import { Link } from 'react-router-dom';
+
 import Cards from "../card/Cards";
 import favouriteIndianLogo from "../../data/favourite-indian.png";
 
@@ -235,14 +237,14 @@ When you're ready, go live with full integration into the production environment
                   {" "}
                   Have a support question?
                 </p>
-                <a
-                  class="footer-call-to-action-button button"
-                  href="/"
-                  target="_self"
-                >
-                  {" "}
-                  Get in Touch{" "}
-                </a>
+                <Link
+  className="footer-call-to-action-button button"
+  // to="/contact"
+  to="/"
+>
+  Get in Touch
+</Link>
+
               </div>
             </div>
           </div>
