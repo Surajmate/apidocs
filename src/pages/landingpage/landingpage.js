@@ -51,16 +51,20 @@ const LandingPage = () => {
       <div className="container-fluid landingPage">
         <div className="banner">
           <div className="banner-content">
-            <h1 style={{ fontSize: "20px"}}>
+            <h1 style={{ fontSize: "20px" }}>
               Welcome to <br />
             </h1>
             <h1>
               Bajaj API Developer Portal <br />
             </h1>
             <p>
-            — your one-stop destination for accessing, integrating, and managing powerful APIs that drive seamless digital experiences. Whether you're building customer journeys, or partner integrations, our APIs offer secure, scalable, and easy-to-use solutions to accelerate your development.
+              — your one-stop destination for accessing, integrating, and
+              managing powerful APIs that drive seamless digital experiences.
+              Whether you're building customer journeys, or partner
+              integrations, our APIs offer secure, scalable, and easy-to-use
+              solutions to accelerate your development.
             </p>
-            <button onClick={() => navigate('/signup')}>SignUp</button>
+            <button onClick={() => navigate("/signup")}>SignUp</button>
           </div>
           <div className="image-container">
             <div className="gallery">
@@ -85,61 +89,103 @@ const LandingPage = () => {
               <div className="how-it">How it </div>
               <h1 className="f-style">Works?</h1>
             </span>
-            Onboard your developers effortlessly. Discover how easy it is to integrate Bajaj APIs in just a few simple steps.
+            Onboard your developers effortlessly. Discover how easy it is to
+            integrate Bajaj APIs in just a few simple steps.
           </div>
-          <div className="how-it-work-div-two">
-            <div>
+          <div className="row text-center py-4">
+            <div className="col-xs-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12 my-3">
               <img
-                style={{ paddingLeft: "20px", height: "115px", width: "115px" }}
+                className="text-center"
                 alt=""
+                height={100}
+                width={100}
                 src="\assets\vecteezy_user-3d-graphic-illustration_42156821_dsbnyu.png"
-              ></img>
-              <p>
-                1.Sign up for Bajaj <br></br>Developer Account.
+              />
+              <p className="">
+                <b>
+                  Sign up for Bajaj <br /> Developer Account.
+                </b>
               </p>
             </div>
-            <div>
+            <div className="col-xs-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12 my-3">
               <img
-                style={{ height: "150px", width: "150px" }}
+                className="text-center"
                 alt=""
+                height={100}
+                width={100}
                 src="/assets/vecteezy_elegant-abstract-cloud-computing-distributed-network_56743178_xkwlg6.png"
-              ></img>
-              <p>&nbsp; &nbsp; &nbsp; 2.Select API</p>
+              />
+              <p className="">
+                <b>Select API</b>
+              </p>
             </div>
-            <div>
+            <div className="col-xs-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12 my-3">
               <img
-                style={{ height: "140px", width: "140px" }}
+                className="text-center"
                 alt=""
+                height={100}
+                width={100}
                 src="/assets/vecteezy_note-checklist-delivery-3d-illustration_23257669_nztffw.png"
-              ></img>
-              <p>&nbsp; &nbsp; &nbsp;3.Test it Out</p>
+              />
+              <p className="">
+                <b>Test it Out</b>
+              </p>
             </div>
           </div>
         </div>
         <div className="Journey-to-go-Live">
           <div className="Journey-to-go-Live-one">
-            <div className="GO-Live">GO Live</div>
-            <h1 className="f-style">With Us</h1>
+            <span>
+              <div className="GO-Live">GO Live</div>
+              <h1 className="f-style">With Us</h1>
+            </span>
           </div>
-          <div className="Journey-to-go-Live-two">
-            <div>
-              <img alt="" src="https://res.cloudinary.com/dlwpgtmcn/image/upload/v1744959380/tools_wrench_icon-1320087277641665992_bpwhq1.png"></img>
-              <p>&nbsp; &nbsp; &nbsp;DEV</p>
+
+          <div className="row text-center py-4">
+            <div className="col-xs-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12 my-2">
+              <img
+                className="text-center"
+                alt=""
+                height={100}
+                width={100}
+                src="https://res.cloudinary.com/dlwpgtmcn/image/upload/v1744959380/tools_wrench_icon-1320087277641665992_bpwhq1.png"
+              />
+              <p className="golive-steps">
+                <b>DEV</b>
+              </p>
             </div>
-            <div>
-              <img alt="" src="https://res.cloudinary.com/dlwpgtmcn/image/upload/v1744959633/computer-131994967732477480_k3n3pg.png"></img>
-              <p>&nbsp; &nbsp; &nbsp; &nbsp; UAT</p>
+            <div className="col-xs-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12 my-2">
+              <img
+                className="text-center"
+                alt=""
+                height={100}
+                width={100}
+                src="https://res.cloudinary.com/dlwpgtmcn/image/upload/v1744959633/computer-131994967732477480_k3n3pg.png"
+              />
+              <p className="golive-steps">
+                <b>UAT</b>
+              </p>
             </div>
-            <div>
-              <img alt="" src="https://res.cloudinary.com/dlwpgtmcn/image/upload/v1744960132/cloud_cloud_computing_comment_communication_connection-1320086425914902674_0px_wg3xcw.svg"></img>
-              <p>PRODUCTION</p>
+            <div className="col-xs-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12 my-2">
+              <img
+                className="text-center"
+                alt=""
+                height={100}
+                width={100}
+                src="https://res.cloudinary.com/dlwpgtmcn/image/upload/v1744960132/cloud_cloud_computing_comment_communication_connection-1320086425914902674_0px_wg3xcw.svg"
+              />
+              <p className="golive-steps">
+                <b>PRODUCTION</b>
+              </p>
             </div>
           </div>
           <div className="Journey-to-go-Live-three">
             <p>
-            Sign up for the Bajaj API Developer Portal Sandbox to kickstart your development journey.
-Once your NDA is in place, upgrade to the UAT environment for comprehensive end-to-end testing.
-When you're ready, go live with full integration into the production environment.
+              Sign up for the Bajaj API Developer Portal Sandbox to kickstart
+              your development journey. Once your NDA is in place, upgrade to
+              the UAT environment for comprehensive end-to-end testing. When
+              you're ready, go live with full integration into the production
+              environment.
             </p>
           </div>
         </div>
@@ -159,8 +205,13 @@ When you're ready, go live with full integration into the production environment
             <div class="footer-content-column">
               <div class="footer-logo">
                 <a class="footer-logo-link" href="/">
-                  <img alt=""
-                    style={{ height: "90px", width: "100%", marginLeft: "-12px" }}
+                  <img
+                    alt="logo"
+                    style={{
+                      height: "90px",
+                      width: "100%",
+                      marginLeft: "-12px",
+                    }}
                     src={favouriteIndianLogo}
                   ></img>
                 </a>
@@ -169,7 +220,7 @@ When you're ready, go live with full integration into the production environment
                 <h2 class="footer-menu-name"> Get Started</h2>
                 <ul id="menu-get-started" class="footer-menu-list">
                   <li class="menu-item menu-item-type-post_type menu-item-object-product">
-                    <a href="/">Start</a>
+                    <a href="/">FAQ</a>
                   </li>
                   <li class="menu-item menu-item-type-post_type menu-item-object-product">
                     <a href="/">Documentation</a>
@@ -184,9 +235,7 @@ When you're ready, go live with full integration into the production environment
                   <li class="menu-item menu-item-type-post_type menu-item-object-page">
                     <a href="/">Contact</a>
                   </li>
-                  <li class="menu-item menu-item-type-taxonomy menu-item-object-category">
-                    <a href="/">News</a>
-                  </li>
+                  
                 </ul>
               </div>
               <div class="footer-menu">
@@ -234,9 +283,19 @@ When you're ready, go live with full integration into the production environment
               <div class="footer-call-to-action">
                 <h2 class="footer-call-to-action-title"> Let's Chat</h2>
                 <p class="footer-call-to-action-description">
-                  {" "}
+                 
                   Have a support question?
                 </p>
+<<<<<<< HEAD
+                <a
+                  class="footer-call-to-action-button button"
+                  href="/"
+                  target="_self"
+                >
+                 
+                  Get in Touch{" "}
+                </a>
+=======
                 <Link
   className="footer-call-to-action-button button"
   // to="/contact"
@@ -245,15 +304,16 @@ When you're ready, go live with full integration into the production environment
   Get in Touch
 </Link>
 
+>>>>>>> 0bc6d96b3bfa2e9e46cea03e47824d5aff98a29c
               </div>
             </div>
           </div>
           <div class="footer-copyright">
             <div class="footer-copyright-wrapper">
               <p class="footer-copyright-text">
-                <a class="footer-copyright-link" href="/" target="_self">
+                <span class="footer-copyright-link" href="/" target="_self">
                   ©2025. | All rights reserved.
-                </a>
+                </span>
               </p>
             </div>
           </div>
