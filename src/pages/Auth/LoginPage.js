@@ -5,35 +5,12 @@ import Navbar from "../Navbar/Navbar";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
-
-  const validate = () => {
-    const newErrors = {};
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (!emailRegex.test(email)) {
-      newErrors.email = "Invalid email format";
-    }
-
-    if (!password.trim()) {
-      newErrors.password = "Password is required";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validate()) {
-      console.log("Login submitted:", { email, password });
-      
-    }
+    console.log("Login submitted:", { email, password });
   };
 
   return (
@@ -43,7 +20,7 @@ const LoginPage = () => {
         className="login-container"
         style={{
           background:
-            "url(https://wallpaperaccess.com/full/2127653.jpg) no-repeat center center/cover",
+            "url(/assets/2127653-contact.jpg) no-repeat center center/cover",
           height: "calc(100vh - 60px)",
         }}
       >
@@ -59,8 +36,10 @@ const LoginPage = () => {
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+                title="Enter a valid email address"
+                required
               />
-              {errors.email && <p className="error">{errors.email}</p>}
             </div>
 
             <div className="form-group">
@@ -71,8 +50,8 @@ const LoginPage = () => {
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
               />
-              {errors.password && <p className="error">{errors.password}</p>}
             </div>
 
             <button type="submit" className="login-button">
@@ -96,6 +75,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-
-
-

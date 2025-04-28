@@ -98,3 +98,11 @@ body {
 
 
 
+@media (max-width: 320px){
+  .sidebar--open {
+    width: 320px;
+    transition: width 0.3s ease;
+  }
+  
+}
+  

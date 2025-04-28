@@ -1,0 +1,1 @@
+export const BASE_URL = "https://apidev.bajajauto.com/dwh-sapi-dev/api/v1";
