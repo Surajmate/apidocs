@@ -286,16 +286,6 @@ const LandingPage = () => {
                  
                   Have a support question?
                 </p>
-<<<<<<< HEAD
-                <a
-                  class="footer-call-to-action-button button"
-                  href="/"
-                  target="_self"
-                >
-                 
-                  Get in Touch{" "}
-                </a>
-=======
                 <Link
   className="footer-call-to-action-button button"
   // to="/contact"
@@ -304,7 +294,6 @@ const LandingPage = () => {
   Get in Touch
 </Link>
 
->>>>>>> 0bc6d96b3bfa2e9e46cea03e47824d5aff98a29c
               </div>
             </div>
           </div>
