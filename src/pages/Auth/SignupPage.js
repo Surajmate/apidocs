@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./LoginPage.css";
+import "./LoginPage.css"; 
 import Navbar from "../Navbar/Navbar";
 
 const SignupPage = () => {
@@ -10,7 +10,6 @@ const SignupPage = () => {
     phone: "",
   });
 
-  const [formErrors, setFormErrors] = useState({});
   const [isChecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
 
@@ -26,41 +25,16 @@ const SignupPage = () => {
     }));
   };
 
-  const validateForm = () => {
-    const errors = {};
-
-    if (!formData.name.trim()) {
-      errors.name = "Full name is required.";
-    }
-
-    if (!formData.email) {
-      errors.email = "Email is required.";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      errors.email = "Invalid email format.";
-    }
-
-    if (!formData.phone) {
-      errors.phone = "Phone number is required.";
-    } else if (!/^\d{10}$/.test(formData.phone)) {
-      errors.phone = "Phone number must be 10 digits.";
-    }
-
-    setFormErrors(errors);
-
-    return Object.keys(errors).length === 0;
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (validateForm() && isChecked) {
+    if (isChecked) {
       const fullPhone = `+91${formData.phone}`;
       console.log("Form submitted:", {
         ...formData,
         phone: fullPhone,
       });
-
-   
+    
     }
   };
 
@@ -87,10 +61,8 @@ const SignupPage = () => {
                 placeholder="Enter your full name"
                 value={formData.name}
                 onChange={handleChange}
+                required
               />
-              {formErrors.name && (
-                <small className="error-text">{formErrors.name}</small>
-              )}
             </div>
 
             <div className="form-group">
@@ -101,10 +73,10 @@ const SignupPage = () => {
                 placeholder="Enter your email"
                 value={formData.email}
                 onChange={handleChange}
+                required
+                pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+                title="Enter a valid email address"
               />
-              {formErrors.email && (
-                <small className="error-text">{formErrors.email}</small>
-              )}
             </div>
 
             <div className="form-group">
@@ -117,11 +89,11 @@ const SignupPage = () => {
                   placeholder="Enter 10-digit number"
                   value={formData.phone}
                   onChange={handleChange}
+                  required
+                  pattern="\d{10}"
+                  title="Phone number must be exactly 10 digits"
                 />
               </div>
-              {formErrors.phone && (
-                <small className="error-text">{formErrors.phone}</small>
-              )}
             </div>
 
             <div className="form-group">
@@ -130,7 +102,9 @@ const SignupPage = () => {
                   style={{ height: "15px", width: "15px", margin: "5px" }}
                   type="checkbox"
                   id="terms"
+                  checked={isChecked}
                   onChange={handleCheckboxChange}
+                  required
                 />
                 <p style={{ margin: 0 }}>
                   I agree to the terms and conditions & privacy policy
@@ -143,7 +117,7 @@ const SignupPage = () => {
               className="login-button"
               disabled={!isChecked}
               style={{
-                backgroundColor: isChecked ? "#007bff" : "#007bff43",
+                backgroundColor: isChecked ? "#3aa7f6" : "#3aa7f663",
                 cursor: isChecked ? "pointer" : "not-allowed",
               }}
             >
