@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
  import { useNavigate } from "react-router-dom";
 import "./landingpage.css"
 import Navbar from "../Navbar/Navbar";
+import { Link } from 'react-router-dom';
+
 import Cards from "../card/Cards";
 import favouriteIndianLogo from "../../data/favourite-indian.png";
 
@@ -284,6 +286,7 @@ const LandingPage = () => {
                  
                   Have a support question?
                 </p>
+<<<<<<< HEAD
                 <a
                   class="footer-call-to-action-button button"
                   href="/"
@@ -292,6 +295,16 @@ const LandingPage = () => {
                  
                   Get in Touch{" "}
                 </a>
+=======
+                <Link
+  className="footer-call-to-action-button button"
+  // to="/contact"
+  to="/"
+>
+  Get in Touch
+</Link>
+
+>>>>>>> 0bc6d96b3bfa2e9e46cea03e47824d5aff98a29c
               </div>
             </div>
           </div>
