@@ -266,7 +266,7 @@ body {
   display: none;
 }
 
-.row {
+.rowHeight {
   overflow-y: auto !important;
   height: 735px !important;
 }
