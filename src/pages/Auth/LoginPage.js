@@ -40,7 +40,7 @@ const LoginPage = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                {errors.email && <p className="error">{errors.email}</p>}
+                {/* {errors.email && <p className="error">{errors.email}</p>} */}
               </div>
 
               <div className="form-group">
@@ -52,7 +52,7 @@ const LoginPage = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                {errors.password && <p className="error">{errors.password}</p>}
+                {/* {errors.password && <p className="error">{errors.password}</p>} */}
               </div>
 
               <button type="submit" className="login-button">
