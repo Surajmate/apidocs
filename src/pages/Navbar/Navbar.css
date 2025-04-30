@@ -1,66 +1,239 @@
 .navbar {
-    display: flex;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: #151c50;
+  color: white;
+  position: sticky;
+  padding: 5px 10px 5px 0;
+}
+
+.logo-img {
+  width: 40px;
+  height: 50px;
+  margin: 5px 10px !important;
+  filter: brightness(3);
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links span {
+  cursor: pointer;
+}
+
+.hamburger-menu {
+  height: 25px;
+  width: 25px;
+  border: 1px solid #ffffff;
+  border-radius: 0.5rem;
+  padding: 2px;
+}
+
+.hamburger-bar {
+  width: 25px;
+  height: 3px;
+  background-color: #000;
+}
+
+.dropdown span {
+  cursor: pointer;
+  padding: 5px;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+@media (max-width: 425px) {
+  .nav-links {
+    display: none;
+  }
+  .dropdown {
+    position: absolute;
+    top: 11%;
+    right: 0;
+    z-index: 20;
+    align-items: end;
     justify-content: space-between;
-    align-items: center;
-    padding: 8px;
     background-color: #151c50;
-    color: white;
-    position: sticky;
+    color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 8px 8px;
+    padding: 10px;
+    display: flex;
+    font-size: 12px;
+    flex-direction: row;
+    width: 100%;
+    transition: top 0.3s ease;
   }
 
-  .f15{
-    font-size: 15px !important;
+  .Bajaj-Api-Developer-Portal {
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    font-weight: 500;
+    font-size: 14px;
   }
-  
-  .nav-links span {
-    margin-left: 20px;
-    cursor: pointer;
-    color: #6fb5ff;
-    transition: color 0.3s;
-  }
-  
-  .nav-links span:hover {
-    color: #ffffff;
-  }
-  
-  
-  .logo {
+
+  .hamburger-menu {
     display: flex;
-    align-items: center;
-  
   }
-  
   .logo-img {
-    width: 40px;
-    height: 50px;
+    width: 30px;
+    height: 40px;
     margin: 5px 10px !important;
-    filter: brightness(3); 
+    filter: brightness(3);
   }
-  
-  .nav-links span {
-    margin-left: 20px;
-    cursor: pointer;
-    color: #9acbff;
+}
+@media (max-width: 320px) {
+  .nav-links {
+    display: none;
   }
-  
-  
-  .nav-links span:hover {
-    color: #dedede; 
-    text-decoration: underline; 
+  .logo-img {
+    width: 30px;
+    height: 40px;
+    margin: 5px 10px !important;
+    filter: brightness(3);
   }
-  
-  .auth-btn {
-    margin-left: 10px;
-    background-color: #c3c1bc;
-    color: black;
-    border: none;
+  .dropdown {
+    position: absolute;
+    top: 10%;
+    right: 0;
+    z-index: 20;
+    align-items: end;
+    justify-content: space-between;
+    background-color: #151c50;
+    color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 8px 8px;
     padding: 10px;
-    cursor: pointer;
-    border-radius: 15%;
-    font-size: small;
-    
+    display: flex;
+    font-size: 12px;
+    flex-direction: row;
+    width: 100%;
+    transition: top 0.3s ease;
   }
-  
-  .auth-btn:hover{
-    background-color: #d8da65;
+
+  .Bajaj-Api-Developer-Portal {
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    margin: 0 0 0 15px;
   }
+
+  .hamburger-menu {
+    display: flex;
+  }
+}
+@media (max-width: 375px) {
+  .nav-links {
+    display: none;
+  }
+  .dropdown {
+    position: absolute;
+    top: 10%;
+    right: 0;
+    z-index: 20;
+    align-items: end;
+    justify-content: space-between;
+    background-color: #4959d8;
+    color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 8px 8px;
+    padding: 10px;
+    display: flex;
+    font-size: 12px;
+    flex-direction: row;
+    width: 100%;
+    transition: top 0.3s ease;
+  }
+
+  .Bajaj-Api-Developer-Portal {
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    margin: 0 0 0 15px;
+  }
+
+  .hamburger-menu {
+    display: flex;
+  }
+}
+
+@media (min-width: 1024px) {
+  .Bajaj-Api-Developer-Portal {
+    display: none;
+  }
+}
+@media (min-width: 768px) {
+  .nav-links {
+    font-size: 14px;
+  }
+
+  .hamburger-menu {
+    display: none;
+  }
+
+  .dropdown {
+    display: none;
+  }
+  .Bajaj-Api-Developer-Portal {
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+  }
+  .logo-img {
+    width: 35px;
+    height: 45px;
+    margin: 5px 10px !important;
+    filter: brightness(3);
+  }
+}
+
+.f15 {
+  font-size: 15px !important;
+}
+
+.nav-links span {
+  margin-left: 20px;
+  cursor: pointer;
+  color: #6fb5ff;
+  transition: color 0.3s;
+}
+
+.nav-links span:hover {
+  color: #ffffff;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+
+
+.nav-links span {
+  margin-left: 20px;
+  cursor: pointer;
+  color: #9acbff;
+}
+
+.nav-links span:hover {
+  color: #dedede;
+  text-decoration: underline;
+}
+
+.auth-btn {
+  margin-left: 10px;
+  background-color: #c3c1bc;
+  color: black;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 15%;
+  font-size: small;
+}
+
+.auth-btn:hover {
+  background-color: #d8da65;
+}
