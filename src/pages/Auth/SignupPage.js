@@ -67,9 +67,9 @@ const SignupPage = () => {
                   pattern="\d{10}"
                   title="Phone number must be exactly 10 digits"
                 />
-                {formErrors.name && (
+                {/* {formErrors.name && (
                   <small className="error-text">{formErrors.name}</small>
-                )}
+                )} */}
               </div>
 
               <div className="form-group">
@@ -81,9 +81,9 @@ const SignupPage = () => {
                   value={formData.email}
                   onChange={handleChange}
                 />
-                {formErrors.email && (
+                {/* {formErrors.email && (
                   <small className="error-text">{formErrors.email}</small>
-                )}
+                )} */}
               </div>
 
               <div className="form-group">
@@ -98,9 +98,9 @@ const SignupPage = () => {
                     onChange={handleChange}
                   />
                 </div>
-                {formErrors.phone && (
+                {/* {formErrors.phone && (
                   <small className="error-text">{formErrors.phone}</small>
-                )}
+                )} */}
               </div>
 
               <div className="form-group">
