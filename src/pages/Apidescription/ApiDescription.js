@@ -9,7 +9,7 @@ import "./ApiDescription.css";
 import "./Sidebar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes, faFolder } from "@fortawesome/free-solid-svg-icons";
-import collection from "../../data/Mulesoft.postman_collection.json"
+import collection from "../../data/Mulesoft.postman_collection.json";
 
 const methodColors = {
   GET: "get",
@@ -19,13 +19,10 @@ const methodColors = {
 };
 
 const ApiMethodChip = ({ method }) => {
-  const colorClasses =
-    methodColors[method.toUpperCase()] || "post";
+  const colorClasses = methodColors[method.toUpperCase()] || "post";
 
   return (
-    <span
-      className={`px-2 py-1 mt-2 text-sm font-medium ${colorClasses}`}
-    >
+    <span className={`px-2 py-1 mt-2 text-sm font-medium ${colorClasses}`}>
       {method}
     </span>
   );
@@ -138,20 +135,17 @@ const ApiDescription = () => {
   const [expandedCategoryIndex, setExpandedCategoryIndex] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
-
-
   const toggleDiv = () => {
-    setIsOpen(prev => !prev);
+
+    setIsOpen((prev) => !prev);
   };
   const handleTrigger = () => {
     setIsOpen(!isOpen);
     console.log(isOpen);
     setSampleresponse({ body: null, lang: null, code: null });
-  }
-
+  };
 
   useEffect(() => {
-    
     const response = collection;
     setApiList(response);
     if (response.item && response.item.length > 0) {
@@ -165,7 +159,7 @@ const ApiDescription = () => {
 
   useEffect(() => {
     document.body.scrollTop = 0;
-    document.documentElement.scrollTop= "100px";
+    document.documentElement.scrollTop = "100px";
   }, [apiData?.request?.description]);
 
   const handleApiClick = (data) => {
@@ -190,7 +184,7 @@ const ApiDescription = () => {
         setSampleresponse({
           body: item.body,
           lang: item._postman_previewlanguage,
-          code: code
+          code: code,
         });
       }
     }
@@ -199,17 +193,25 @@ const ApiDescription = () => {
     }
   };
 
-  
-
   return (
     <div className="special-gothic-regular container-fluid p-0 m-0">
       <div className="page">
         <div className="content p-0">
-          <Navbar />
-          <div className={`description-container colStyle ${isOpen ? "ml-side" : "n-ml-side"}`}
-     style={{ padding: "10px 200px", height: "calc(100vh - 60px)", overflowY: "auto" }}>
+          <div className="siderbar-opener">
+            <div className="three-line"  onClick={toggleDiv}>
+              <FontAwesomeIcon
+                icon={faBars}
+                
+              />
+            </div>
+            <Navbar />
+          </div>
 
-
+          <div
+            className={`description-container colStyle ${
+              isOpen ? "ml-side" : "n-ml-side"
+            }`}
+          >
             {apiData.name ? (
               <div className="mt-2">
                 <h1>{apiData.name}</h1>
@@ -253,118 +255,119 @@ const ApiDescription = () => {
                       <div class="a_url">
                         <div class="a_full_url">
                           <div class="a_full_url_inner">
-                            <ApiMethodChip className="space-x-2" method={apiData?.request?.method} />
-                            <span id="apiurl" class="apiurl_s copyurl">{apiData?.request?.url}</span>
+                            <ApiMethodChip
+                              className="space-x-2"
+                              method={apiData?.request?.method}
+                            />
+                            <span id="apiurl" class="apiurl_s copyurl">
+                              {apiData?.request?.url}
+                            </span>
                           </div>
                         </div>
                       </div>
                     </div>
 
-                        <div className="section-heading">Request Headers</div>
+                    <div className="section-heading">Request Headers</div>
 
-                        <div className="parameter-group">
-                          {apiData.request.header?.map((param, index) => (
-                            <div key={index} className="parameter-row">
-                              <span className="parameter-name">
-                                {param.key} - <span className="parameter-required">
-                                {param.required ? "Required" : "Optional"}
-                              </span>
-                              </span>
-                              <span className="parameter-type">
-                                {param.description}
-                              </span>
-                              {/* <span className="parameter-required">
+                    <div className="parameter-group">
+                      {apiData.request.header?.map((param, index) => (
+                        <div key={index} className="parameter-row">
+                          <span className="parameter-name">
+                            {param.key} -{" "}
+                            <span className="parameter-required">
+                              {param.required ? "Required" : "Optional"}
+                            </span>
+                          </span>
+                          <span className="parameter-type">
+                            {param.description}
+                          </span>
+                          {/* <span className="parameter-required">
                                 {param.required ? "Required" : "Optional"}
                               </span> */}
-                            </div>
-                          ))}
                         </div>
+                      ))}
+                    </div>
 
-                        <div className="section-heading">Request Body</div>
+                    <div className="section-heading">Request Body</div>
 
-                        {apiData?.request?.body && (
-                          <ExpandComponent
-                            obj={JSON.parse(
-                              apiData?.request?.body?.raw || "{}"
-                            )}
-                          />
-                        )}
+                    {apiData?.request?.body && (
+                      <ExpandComponent
+                        obj={JSON.parse(apiData?.request?.body?.raw || "{}")}
+                      />
+                    )}
 
-                        <div className="section-heading">Response Body</div>
+                    <div className="section-heading">Response Body</div>
 
-                        {apiData?.request?.body && (
-                          <ExpandComponent
-                            obj={JSON.parse(
-                              apiData?.request?.body?.raw || "{}"
-                            )}
-                          />
-                        )}
-                     
-                        <div className="section-heading">Languages</div>
+                    {apiData?.request?.body && (
+                      <ExpandComponent
+                        obj={JSON.parse(apiData?.request?.body?.raw || "{}")}
+                      />
+                    )}
 
-                        <div className="language-tabs">
-                          {Object.keys(languageMap).map((lang, index) => (
-                            <img
-                              key={index}
-                              src={`/assets/${lang
-                                .toLowerCase()
-                                .replace(/[^a-z]/g, "")}.png`}
-                              alt={lang}
-                              className={`language-tab ${
-                                showLang === lang ? "active" : ""
-                              }`}
-                              onClick={() => {
-                                setSelectedLanguage(languageMap[lang]);
-                                setShowLang(lang);
-                              }}
-                            />
-                          ))}
-                        </div>
+                    <div className="section-heading">Languages</div>
 
-                        <div className="section-heading">Request Sample</div>
+                    <div className="language-tabs">
+                      {Object.keys(languageMap).map((lang, index) => (
+                        <img
+                          key={index}
+                          src={`/assets/${lang
+                            .toLowerCase()
+                            .replace(/[^a-z]/g, "")}.png`}
+                          alt={lang}
+                          className={`language-tab ${
+                            showLang === lang ? "active" : ""
+                          }`}
+                          onClick={() => {
+                            setSelectedLanguage(languageMap[lang]);
+                            setShowLang(lang);
+                          }}
+                        />
+                      ))}
+                    </div>
 
-                        <SyntaxHighlighter
-                          className="code-box"
-                          language={"javascript"}
-                          style={coy}
-                          showLineNumbers
-                        >
-                          {generators[selectedLanguage](
-                            apiData,
-                            JSON.stringify(
-                              apiData?.request?.body?.raw || {},
-                              null,
-                              2
-                            )
-                          )}
-                        </SyntaxHighlighter>
+                    <div className="section-heading">Request Sample</div>
 
-                        <select
-                          className="form-select mt-2 select-border"
-                          value={sampleresponse}
-                          name=""
-                          id=""
-                          onChange={(e) => hnadleSampleresponse(e.target.value)}
-                        >
-                          <option value="">Select code status</option>
-                          {apiData?.response?.map((code, index) => (
-                            <option key={index} value={code.code}>
-                              {code.code}
-                            </option>
-                          ))}
-                        </select>
+                    <SyntaxHighlighter
+                      className="code-box"
+                      language={"javascript"}
+                      style={coy}
+                      showLineNumbers
+                    >
+                      {generators[selectedLanguage](
+                        apiData,
+                        JSON.stringify(
+                          apiData?.request?.body?.raw || {},
+                          null,
+                          2
+                        )
+                      )}
+                    </SyntaxHighlighter>
 
-                        <div className="section-heading">Response</div>
-                        
-                        <SyntaxHighlighter
-                          language={"javascript"}
-                          style={coy}
-                          showLineNumbers
-                        >
-                          {sampleresponse.body}
-                        </SyntaxHighlighter>
+                    <select
+                      className="form-select mt-2 select-border"
+                      value={sampleresponse}
+                      name=""
+                      id=""
+                      onChange={(e) => hnadleSampleresponse(e.target.value)}
+                    >
+                      <option value="">Select code status</option>
+                      {apiData?.response?.map((code, index) => (
+                        <option key={index} value={code.code}>
+                          {code.code}
+                        </option>
+                      ))}
+                    </select>
 
-                      </div>
+                    <div className="section-heading">Response</div>
+
+                    <SyntaxHighlighter
+                      language={"javascript"}
+                      style={coy}
+                      showLineNumbers
+                    >
+                      {sampleresponse.body}
+                    </SyntaxHighlighter>
+                  </div>
                 )}
               </div>
             ) : (
@@ -410,26 +413,35 @@ const ApiDescription = () => {
           </div>
         </div>
 
-        <div className={`sidebar ${isOpen ? "sidebar--open" : ""}`}>
+        <div
+          className={`sidebar ${isOpen ? "sidebar--open" : ""}`}
+          style={{
+            visibility: isOpen ? "visible" : "hidden",
+            transition: "visibility 0.3s, opacity 0.3s",
+            opacity: isOpen ? 1 : 0,
+          }}
+        >
           <div className="trigger" onClick={handleTrigger}>
-            
-        <div className={`logo ${isOpen ? "" : "d-none"}`}>
-          <img src="/assets/logo.png" alt="BikeAPI Logo" className="logo-img"/>
-          
-        </div>     
-         <div onClick={toggleDiv} style={{ cursor: 'pointer' }}>
-          <FontAwesomeIcon className="FontAwesomeIcon" icon={isOpen ? faTimes : faBars} /></div>
+            <div className={`logo ${isOpen ? "" : "d-none"}`}>
+              <img
+                src="/assets/logo.png"
+                alt="BikeAPI Logo"
+                className="logo-img"
+              />
+            </div>
+            <div onClick={toggleDiv} style={{ cursor: "pointer" }}>
+              <FontAwesomeIcon className="FontAwesomeIcon" icon={faTimes} />
+            </div>
           </div>
 
           <div
-        className="available-apis-section text-white"
-        style={{
-          display: isOpen ? 'block':'none',
-          scrollbarColor: '#fff #151c50',
-          maxHeight: '100vh',
-        }}
-      >
-
+            className="available-apis-section text-white"
+            style={{
+              display: isOpen ? "block" : "none",
+              scrollbarColor: "#fff #151c50",
+              maxHeight: "100vh",
+            }}
+          >
             <div className="accordion-container">
               {Array.isArray(apiList.item) ? (
                 <ul className="accordion-list">
@@ -437,60 +449,74 @@ const ApiDescription = () => {
                     <li key={index} className="accordion-item">
                       <div
                         className="accordion-header"
-                        onClick={() => {toggleAccordion(index); setApiData({
-                          name: entry.name || "",
-                          request: { description: entry.description || "" },
-                        });}}
+                        onClick={() => {
+                          toggleAccordion(index);
+                          setApiData({
+                            name: entry.name || "",
+                            request: { description: entry.description || "" },
+                          });
+                        }}
                       >
                         <strong>{entry.name}</strong>
                       </div>
 
                       {expandedCategoryIndex === index && (
                         <div className="accordion-body">
-                          {entry?.item?.length > 0 ? (
-                            entry.item.map((api, index1) => (
-                              <div key={index1} className="accordion-api-item">
-                                <h6 className="tagDesign"><FontAwesomeIcon className="FontAwesomeIcon" icon={faFolder} /> {api.name}</h6>
-                                {Array.isArray(api.item) ? (
-                                  <ul>
-                                    {api.item.map((entry1, index2) => (
-                                      <li key={index2}>
+                          {entry?.item?.length > 0
+                            ? entry.item.map((api, index1) => (
+                                <div
+                                  key={index1}
+                                  className="accordion-api-item"
+                                >
+                                  <h6 className="tagDesign">
+                                    <FontAwesomeIcon
+                                      className="FontAwesomeIcon"
+                                      icon={faFolder}
+                                    />{" "}
+                                    {api.name}
+                                  </h6>
+                                  {Array.isArray(api.item) ? (
+                                    <ul>
+                                      {api.item.map((entry1, index2) => (
+                                        <li key={index2}>
+                                          <div
+                                            className="accordion-subitem"
+                                            onClick={() => {
+                                              handleApiClick(entry1);
+                                              handleTrigger();
+                                            }}
+                                          >
+                                            <ApiMethodChip
+                                              className="space-x-2"
+                                              method={entry1.request.method}
+                                            />
+                                            <strong> {entry1.name}</strong>
+                                          </div>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  ) : (
+                                    <ul>
+                                      <li key={index1}>
                                         <div
                                           className="accordion-subitem"
-                                          onClick={() => {handleApiClick(entry1); handleTrigger()}}
-                                          
+                                          onClick={() => {
+                                            handleApiClick(api);
+                                            handleTrigger();
+                                          }}
                                         >
                                           <ApiMethodChip
                                             className="space-x-2"
-                                            method={entry1.request.method}
+                                            method={api.request.method}
                                           />
-                                          <strong>
-                                            {" "}
-                                            {entry1.name}
-                                          </strong>
+                                          <strong>{api.name}</strong>
                                         </div>
                                       </li>
-                                    ))}
-                                  </ul>
-                                ) : (
-                                  <ul>
-                                    <li key={index1}>
-                                      <div
-                                        className="accordion-subitem"
-                                        onClick={() => {handleApiClick(api); handleTrigger()}}
-                                      >
-                                      <ApiMethodChip
-                                        className="space-x-2"
-                                        method={api.request.method}
-                                      />
-                                        <strong>{api.name}</strong>
-                                      </div>
-                                    </li>
-                                  </ul>
-                                )}
-                              </div>
-                            ))
-                          ) : ('')} 
+                                    </ul>
+                                  )}
+                                </div>
+                              ))
+                            : ""}
                           {/* collection data not found */}
                         </div>
                       )}

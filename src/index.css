@@ -1,44 +1,8 @@
-.landing-page {
-  text-align: center;
-  padding: 50px;
-}
 
-.api-cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
 
-.api-card {
-  background: #fff;
-  margin: 10px;
-  padding: 20px;
-  border-radius: 8px;
-  width: 250px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.api-card a {
-  text-decoration: none;
-  color: #333;
-}
-
-.api-details {
-  padding: 20px;
-  max-width: 800px;
-  margin: auto;
-  background: white;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-}
-
-.api-details h1 {
-  font-size: 2rem;
-}
-
-.api-details pre {
-  background: #f5f5f5;
-  padding: 20px;
-  border-radius: 5px;
-  overflow-x: auto;
-}
+.specially-for-scroll{
+  max-height: 100vh; /* Adjust height as needed */
+  overflow-y: auto; /* Enables vertical scrollbar when needed */
+  overflow-x: hidden; /* Prevents horizontal scrolling */
+  scrollbar-width: thin; /* For Firefox - optional */
+  scrollbar-color: #888; /* For Firefox - optional */}

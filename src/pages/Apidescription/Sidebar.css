@@ -15,8 +15,8 @@ body {
 }
 
 .content {
-  width: calc(100% - 50px);
-  margin-left: auto;
+  width: 100%;
+
   padding: 15px;
   height: 100%;
   word-break: break-word;
@@ -27,6 +27,8 @@ body {
   top: 0;
   width: 50px;
   height: 100vh; 
+  border: #ffffff 1px;
+  border-style: hidden solid hidden hidden;
   background-color: #151c50;
   transition: width 0.3s ease;
   padding-top: 15px;
@@ -35,7 +37,9 @@ body {
 
 .FontAwesomeIcon {
   color: #ffffff;
+ 
 }
+.three-line{ margin: 1rem; color: #ffffff;}
 
 .sidebar .sidebar-position {
   height: 50px;
@@ -97,12 +101,43 @@ body {
 
 
 
-
-@media (max-width: 320px){
+@media (width: 320px) {
   .sidebar--open {
-    width: 320px;
-    transition: width 0.3s ease;
-  }
+  padding-right: 10px;
+  width:fit-content;
+}
+
+}
+
+@media (width: 425px) {
+  .sidebar--open {
+  padding-right: 10px;
+  width:fit-content;
+}
+
+}
+
+@media (width: 768px) {
+  .sidebar--open {
+  padding-right: 10px;
+  width:fit-content;
+}
+
+}
+
+@media (width: 1024px) {
+  .sidebar--open {
+   padding-right: 10px;
+  width:fit-content;
+}
+
+}
+
+@media (width: 375px) {
+  .sidebar--open {
+  padding-right: 10px;
+  width:fit-content;
   
 }
-  
+
+}
